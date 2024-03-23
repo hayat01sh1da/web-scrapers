@@ -1,14 +1,16 @@
 import unittest
 import sys
 sys.path.append('./src')
-import os.path
+import os
 from os import path
 from text_extractor import TextExtractor
 
 class TestTextExtractor(unittest.TestCase):
     def setUp(self):
-        self.text_extractor = TextExtractor('https://scraping-for-beginner.herokuapp.com/login_page')
-        self.text_extractor.login('imanishi', 'kohei')
+        self.text_extractor = TextExtractor()
+        self.url = 'https://scraping-for-beginner.herokuapp.com/login_page'
+        self.text_extractor.login(self.url, 'imanishi', 'kohei')
+        self.export_path = os.path.join('.', 'csv', 'lecturer_info.csv')
 
     def test_get_lecturer_info(self):
         profile, *_ = self.text_extractor.get_lecturer_info()
@@ -22,8 +24,8 @@ class TestTextExtractor(unittest.TestCase):
 
     def test_export_csv(self):
         _, keys, vals = self.text_extractor.get_lecturer_info()
-        self.text_extractor.export_csv(keys, vals, './csv/lecturer_info.csv')
-        self.assertEqual(True, path.exists('./csv/lecturer_info.csv'))
+        self.text_extractor.export_csv(keys, vals, self.export_path)
+        self.assertEqual(True, path.exists(self.export_path))
 
 if __name__ == '__main__':
     unittest.main()

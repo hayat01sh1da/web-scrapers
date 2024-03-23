@@ -5,18 +5,18 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 
 class TextExtractor:
-    def __init__(self, url):
+    def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless=new')
         self.chrome = webdriver.Chrome(service=Service(os.environ['PATH_TO_WEBDRIVER']), options=options)
-        self.chrome.get(url)
 
-    def login(self, user_name, pwd):
+    def login(self, url, user_name, pwd):
+        self.chrome.get(url)
         username = self.chrome.find_element(By.ID, 'username')
-        username.send_keys(user_name)
         password = self.chrome.find_element(By.ID, 'password')
-        password.send_keys(pwd)
         login = self.chrome.find_element(By.ID, 'login-btn')
+        username.send_keys(user_name)
+        password.send_keys(pwd)
         login.click()
 
     def get_lecturer_info(self):

@@ -8,51 +8,50 @@ sys.path.append('./src/lib')
 from list_handler import ListHandler
 
 class InfoCollector:
-    def __init__(self, base_url):
+    def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless=new')
         self.chrome = webdriver.Chrome(service=Service(os.environ['PATH_TO_WEBDRIVER']), options=options)
-        self.base_url = base_url
         self.list_handler = ListHandler()
 
-    def _get_url(self, query_str=''):
-        url = self.base_url + query_str
+    def _get_url(self, base_url, query_str=''):
+        url = '{base_url}{query_str}'.format(base_url=base_url, query_str=query_str)
         self.chrome.get(url)
 
     def _get_ranking_items(self):
         elem_ranking_items = self.chrome.find_elements(By.CLASS_NAME, 'u_categoryTipsItem')
         return elem_ranking_items
 
-    def get_titles(self, query_str):
-        self._get_url(query_str)
+    def get_titles(self, base_url, query_str):
+        self._get_url(base_url, query_str)
         elem_titles = self.chrome.find_elements(By.CLASS_NAME, 'u_title')
         titles = []
         for elem_title in elem_titles:
             titles.append(elem_title.text.split('\n')[-1])
         return titles
 
-    def get_evaluations(self, query_str):
-        self._get_url(query_str)
+    def get_evaluations(self, base_url, query_str):
+        self._get_url(base_url, query_str)
         elem_rank_boxes = self.chrome.find_elements(By.CLASS_NAME, 'u_rankBox')
         evaluations = []
         for elem_rank_box in elem_rank_boxes:
             evaluations.append(float(elem_rank_box.find_element(By.CLASS_NAME, 'evaluateNumber').text))
         return evaluations
 
-    def get_categories(self):
-        self._get_url()
+    def get_categories(self, base_url):
+        self._get_url(base_url)
         elem_ranking_items = self._get_ranking_items()
         categories = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
         return categories[0]
 
-    def get_rankings(self, query_str):
-        self._get_url(query_str)
+    def get_rankings(self, base_url, query_str):
+        self._get_url(base_url, query_str)
         elem_ranking_items = self._get_ranking_items()
         rankings = self.list_handler.class_elems_list(elem_ranking_items, 'is_rank')
         return rankings
 
-    def get_comments(self, query_str):
-        self._get_url(query_str)
+    def get_comments(self, base_url, query_str):
+        self._get_url(base_url, query_str)
         elem_ranking_items = self._get_ranking_items()
         comments = self.list_handler.class_elems_list(elem_ranking_items, 'comment')
         return comments

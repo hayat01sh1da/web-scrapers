@@ -1,27 +1,26 @@
+import os
 import unittest
 import sys
 sys.path.append('./src')
 sys.path.append('./src/lib')
-import os.path
 from os import path
 from info_collector import InfoCollector
 
 class TestInfoCollector(unittest.TestCase):
     def setUp(self):
-        self.info_collector = InfoCollector('https://scraping-for-beginner.herokuapp.com/ranking/')
-        titles = []
-        evaluations = []
-        rankings = []
-        for i in range(1, 4):
-            titles.append(self.info_collector.get_titles('?page={}'.format(i)))
-            evaluations.append(self.info_collector.get_evaluations('?page={}'.format(i)))
-            rankings.append(self.info_collector.get_rankings('?page={}'.format(i)))
-        self.titles = sum(titles, [])
-        self.evaluations = sum(evaluations, [])
-        self.rankings = sum(rankings, [])
-        self.categories = self.info_collector.get_categories()
+        self.info_collector = InfoCollector()
+        self.base_url = 'https://scraping-for-beginner.herokuapp.com/ranking/'
+        self.titles = []
+        self.evaluations = []
+        self.rankings = []
+        self.comments = []
+        self.categories = []
+        self.export_path = os.path.join('.', 'csv', 'tour_reviews.csv')
 
     def test_get_titles(self):
+        for i in range(1, 4):
+            self.titles.append(self.info_collector.get_titles(self.base_url, '?page={}'.format(i)))
+        self.titles = sum(self.titles, [])
         self.assertEqual([
             '観光地 1',
             '観光地 2',
@@ -56,6 +55,9 @@ class TestInfoCollector(unittest.TestCase):
         ], self.titles)
 
     def test_get_evaluations(self):
+        for i in range(1, 4):
+            self.evaluations.append(self.info_collector.get_evaluations(self.base_url, '?page={}'.format(i)))
+        self.evaluations = sum(self.evaluations, [])
         self.assertEqual([
             4.7, 4.7, 4.6, 4.5, 4.5, 4.4, 4.3, 4.3, 4.2, 4.1,
             4.1, 4.0, 3.9, 3.9, 3.8, 3.7, 3.7, 3.6, 3.5, 3.5,
@@ -63,10 +65,13 @@ class TestInfoCollector(unittest.TestCase):
         ], self.evaluations)
 
     def test_get_categories(self):
-        self.categories = self.info_collector.get_categories()
+        self.categories = self.info_collector.get_categories(self.base_url)
         self.assertEqual(['楽しさ', '人混みの多さ', '景色', 'アクセス'], self.categories)
 
     def test_get_rankings(self):
+        for i in range(1, 4):
+            self.rankings.append(self.info_collector.get_rankings(self.base_url, '?page={}'.format(i)))
+        self.rankings = sum(self.rankings, [])
         self.assertEqual([
             [4.6, 4.5, 4.9, 4.2],
             [4.6, 4.5, 4.9, 4.2],
@@ -102,14 +107,22 @@ class TestInfoCollector(unittest.TestCase):
 
     # Comments are shown at random every time the browser is booted, so the value of each element cannot be tested.
     def test_get_comments(self):
-        comments = []
         for i in range(1, 4):
-            comments.append(self.info_collector.get_comments('?page={}'.format(i)))
-        self.assertEqual(30, len(sum(comments, [])))
+            self.comments.append(self.info_collector.get_comments(self.base_url, '?page={}'.format(i)))
+        self.assertEqual(30, len(sum(self.comments, [])))
 
     def test_export_csv(self):
-        self.info_collector.export_csv(self.titles, self.evaluations, self.rankings, self.categories, './csv/tour_reviews.csv')
-        self.assertEqual(True, path.exists('./csv/tour_reviews.csv'))
+        for i in range(1, 4):
+            self.titles.append(self.info_collector.get_titles(self.base_url, '?page={}'.format(i)))
+            self.evaluations.append(self.info_collector.get_evaluations(self.base_url, '?page={}'.format(i)))
+            self.rankings.append(self.info_collector.get_rankings(self.base_url, '?page={}'.format(i)))
+            self.comments.append(self.info_collector.get_comments(self.base_url, '?page={}'.format(i)))
+        self.titles = sum(self.titles, [])
+        self.evaluations = sum(self.evaluations, [])
+        self.categories = self.info_collector.get_categories(self.base_url)
+        self.rankings = sum(self.rankings, [])
+        self.info_collector.export_csv(self.titles, self.evaluations, self.rankings, self.categories, self.export_path)
+        self.assertEqual(True, path.exists(self.export_path))
 
 if __name__ == '__main__':
     unittest.main()
