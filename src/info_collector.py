@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import sys
 sys.path.append('./src/lib')
-from list_handler import *
+from list_handler import ListHandler
 
 class InfoCollector:
     def __init__(self, base_url):
@@ -13,6 +13,7 @@ class InfoCollector:
         options.add_argument('--headless=new')
         self.chrome = webdriver.Chrome(service=Service(os.environ['PATH_TO_WEBDRIVER']), options=options)
         self.base_url = base_url
+        self.list_handler = ListHandler()
 
     def _get_url(self, query_str=''):
         url = self.base_url + query_str
@@ -41,19 +42,19 @@ class InfoCollector:
     def get_categories(self):
         self._get_url()
         elem_ranking_items = self._get_ranking_items()
-        categories = tag_elems_list(elem_ranking_items, 'dt')
+        categories = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
         return categories[0]
 
     def get_rankings(self, query_str):
         self._get_url(query_str)
         elem_ranking_items = self._get_ranking_items()
-        rankings = class_elems_list(elem_ranking_items, 'is_rank')
+        rankings = self.list_handler.class_elems_list(elem_ranking_items, 'is_rank')
         return rankings
 
     def get_comments(self, query_str):
         self._get_url(query_str)
         elem_ranking_items = self._get_ranking_items()
-        comments = class_elems_list(elem_ranking_items, 'comment')
+        comments = self.list_handler.class_elems_list(elem_ranking_items, 'comment')
         return comments
 
     def export_csv(self, titles, evaluations, rankings, categories, path):
