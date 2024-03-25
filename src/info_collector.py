@@ -1,17 +1,13 @@
-import os
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import pandas as pd
 import sys
 sys.path.append('./src/lib')
 from list_handler import ListHandler
+from chrome_driver import ChromeDriver
 
 class InfoCollector:
     def __init__(self):
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless=new')
-        self.chrome = webdriver.Chrome(service=Service(os.environ['PATH_TO_WEBDRIVER']), options=options)
+        self.chrome       = ChromeDriver().webdriver
         self.list_handler = ListHandler()
 
     def get_titles(self, base_url, query_str):

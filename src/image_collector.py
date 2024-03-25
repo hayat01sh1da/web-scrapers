@@ -1,18 +1,15 @@
-import os
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import io
 from urllib import request
 from PIL import Image
 import sys
 sys.path.append('./imgs')
+sys.path.append('./src/lib')
+from chrome_driver import ChromeDriver
 
 class ImageCollector:
     def __init__(self):
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless=new')
-        self.chrome = webdriver.Chrome(service = Service(os.environ['PATH_TO_WEBDRIVER']), options = options)
+        self.chrome = ChromeDriver().webdriver
 
     def get_images(self, url):
         self.chrome.get(url)
