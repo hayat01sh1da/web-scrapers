@@ -3,7 +3,6 @@ import io
 from urllib import request
 from PIL import Image
 import sys
-sys.path.append('./imgs')
 sys.path.append('./src/lib')
 from chrome_driver import ChromeDriver
 

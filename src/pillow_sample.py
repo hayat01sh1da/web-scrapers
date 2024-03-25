@@ -1,6 +1,4 @@
 from PIL import Image
-import sys
-sys.path.append('./imgs')
 
 class PillowSample:
     def __init__(self, path):

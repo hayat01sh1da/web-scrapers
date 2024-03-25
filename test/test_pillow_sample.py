@@ -2,7 +2,6 @@ import unittest
 import sys
 sys.path.append('./src')
 sys.path.append('./imgs')
-import os.path
 from os import path
 from pillow_sample import PillowSample
 
