@@ -55,7 +55,7 @@ class InfoCollector:
 
     # private
 
-    def __get_url__(self, url, query_str=''):
+    def __get_url__(self, url, query_str = ''):
         target_url = '{url}{query_str}'.format(url = url, query_str = query_str)
         self.chrome.get(target_url)
 
