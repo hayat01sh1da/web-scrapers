@@ -12,7 +12,7 @@ class ImageCollector:
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless=new')
-        self.chrome = webdriver.Chrome(service=Service(os.environ['PATH_TO_WEBDRIVER']), options=options)
+        self.chrome = webdriver.Chrome(service = Service(os.environ['PATH_TO_WEBDRIVER']), options = options)
 
     def get_images(self, url):
         self.chrome.get(url)
@@ -22,7 +22,7 @@ class ImageCollector:
             img_urls.append(img_div.find_element(By.TAG_NAME, 'img').get_attribute('src'))
         images = []
         for img_url in img_urls:
-            f = io.BytesIO(request.urlopen(img_url).read())
+            f     = io.BytesIO(request.urlopen(img_url).read())
             image = Image.open(f)
             images.append(image)
         return images

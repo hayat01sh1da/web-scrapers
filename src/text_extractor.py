@@ -14,17 +14,17 @@ class TextExtractor:
         self.chrome.get(url)
         username = self.chrome.find_element(By.ID, 'username')
         password = self.chrome.find_element(By.ID, 'password')
-        login = self.chrome.find_element(By.ID, 'login-btn')
+        login    = self.chrome.find_element(By.ID, 'login-btn')
         username.send_keys(user_name)
         password.send_keys(pwd)
         login.click()
 
     def get_lecturer_info(self):
-        ths = self.chrome.find_elements(By.TAG_NAME, 'th')
+        ths  = self.chrome.find_elements(By.TAG_NAME, 'th')
         keys = []
         for th in ths:
             keys.append(th.text)
-        tds = self.chrome.find_elements(By.TAG_NAME, 'td')
+        tds  = self.chrome.find_elements(By.TAG_NAME, 'td')
         vals = []
         for td in tds:
             if '\n' in td.text:
@@ -37,7 +37,7 @@ class TextExtractor:
         return profile, keys, vals
 
     def export_csv(self, keys, vals, path):
-        df = pd.DataFrame()
+        df         = pd.DataFrame()
         df['項目'] = keys
-        df['値'] = vals
+        df['値']   = vals
         df.to_csv(path)

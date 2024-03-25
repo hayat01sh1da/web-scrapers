@@ -15,7 +15,7 @@ class InfoCollector:
         self.list_handler = ListHandler()
 
     def _get_url(self, base_url, query_str=''):
-        url = '{base_url}{query_str}'.format(base_url=base_url, query_str=query_str)
+        url = '{base_url}{query_str}'.format(base_url = base_url, query_str = query_str)
         self.chrome.get(url)
 
     def _get_ranking_items(self):
@@ -25,7 +25,7 @@ class InfoCollector:
     def get_titles(self, base_url, query_str):
         self._get_url(base_url, query_str)
         elem_titles = self.chrome.find_elements(By.CLASS_NAME, 'u_title')
-        titles = []
+        titles      = []
         for elem_title in elem_titles:
             titles.append(elem_title.text.split('\n')[-1])
         return titles
@@ -33,7 +33,7 @@ class InfoCollector:
     def get_evaluations(self, base_url, query_str):
         self._get_url(base_url, query_str)
         elem_rank_boxes = self.chrome.find_elements(By.CLASS_NAME, 'u_rankBox')
-        evaluations = []
+        evaluations     = []
         for elem_rank_box in elem_rank_boxes:
             evaluations.append(float(elem_rank_box.find_element(By.CLASS_NAME, 'evaluateNumber').text))
         return evaluations
@@ -41,26 +41,26 @@ class InfoCollector:
     def get_categories(self, base_url):
         self._get_url(base_url)
         elem_ranking_items = self._get_ranking_items()
-        categories = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
+        categories         = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
         return categories[0]
 
     def get_rankings(self, base_url, query_str):
         self._get_url(base_url, query_str)
         elem_ranking_items = self._get_ranking_items()
-        rankings = self.list_handler.class_elems_list(elem_ranking_items, 'is_rank')
+        rankings           = self.list_handler.class_elems_list(elem_ranking_items, 'is_rank')
         return rankings
 
     def get_comments(self, base_url, query_str):
         self._get_url(base_url, query_str)
         elem_ranking_items = self._get_ranking_items()
-        comments = self.list_handler.class_elems_list(elem_ranking_items, 'comment')
+        comments           = self.list_handler.class_elems_list(elem_ranking_items, 'comment')
         return comments
 
     def export_csv(self, titles, evaluations, rankings, categories, path):
-        df = pd.DataFrame()
-        df['観光地'] = titles
-        df['総合評価'] = evaluations
-        df_rankings = pd.DataFrame(rankings)
+        df                  = pd.DataFrame()
+        df['観光地']         = titles
+        df['総合評価']       = evaluations
+        df_rankings         = pd.DataFrame(rankings)
         df_rankings.columns = categories
-        df = pd.concat([df, df_rankings], axis=1)
+        df                  = pd.concat([df, df_rankings], axis = 1)
         df.to_csv(path)

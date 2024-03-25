@@ -9,7 +9,7 @@ from image_collector import ImageCollector
 class TestImageCollector(unittest.TestCase):
     def setUp(self):
         self.image_collector = ImageCollector()
-        self.url = 'https://scraping-for-beginner.herokuapp.com/image'
+        self.url             = 'https://scraping-for-beginner.herokuapp.com/image'
 
     def test_get_images(self):
         self.assertEqual(24, len(self.image_collector.get_images(self.url)))

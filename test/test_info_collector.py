@@ -9,13 +9,13 @@ from info_collector import InfoCollector
 class TestInfoCollector(unittest.TestCase):
     def setUp(self):
         self.info_collector = InfoCollector()
-        self.base_url = 'https://scraping-for-beginner.herokuapp.com/ranking/'
-        self.titles = []
-        self.evaluations = []
-        self.rankings = []
-        self.comments = []
-        self.categories = []
-        self.export_path = os.path.join('.', 'csv', 'tour_reviews.csv')
+        self.base_url       = 'https://scraping-for-beginner.herokuapp.com/ranking/'
+        self.titles         = []
+        self.evaluations    = []
+        self.rankings       = []
+        self.comments       = []
+        self.categories     = []
+        self.export_path    = os.path.join('.', 'csv', 'tour_reviews.csv')
 
     def test_get_titles(self):
         for i in range(1, 4):
@@ -117,10 +117,10 @@ class TestInfoCollector(unittest.TestCase):
             self.evaluations.append(self.info_collector.get_evaluations(self.base_url, '?page={}'.format(i)))
             self.rankings.append(self.info_collector.get_rankings(self.base_url, '?page={}'.format(i)))
             self.comments.append(self.info_collector.get_comments(self.base_url, '?page={}'.format(i)))
-        self.titles = sum(self.titles, [])
+        self.titles      = sum(self.titles, [])
         self.evaluations = sum(self.evaluations, [])
-        self.categories = self.info_collector.get_categories(self.base_url)
-        self.rankings = sum(self.rankings, [])
+        self.categories  = self.info_collector.get_categories(self.base_url)
+        self.rankings    = sum(self.rankings, [])
         self.info_collector.export_csv(self.titles, self.evaluations, self.rankings, self.categories, self.export_path)
         self.assertEqual(True, path.exists(self.export_path))
 
