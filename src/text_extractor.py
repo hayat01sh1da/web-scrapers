@@ -34,8 +34,8 @@ class TextExtractor:
             profile[keys[i]] = vals[i]
         return profile, keys, vals
 
-    def export_csv(self, keys, vals, path):
+    def export_csv(self, keys, vals, filepath):
         df         = pd.DataFrame()
         df['項目'] = keys
         df['値']   = vals
-        df.to_csv(path)
+        df.to_csv(filepath)

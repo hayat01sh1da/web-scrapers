@@ -23,8 +23,8 @@ class ImageCollector:
             images.append(image)
         return images
 
-    def save_images(self, images, path):
+    def save_images(self, images, filepath):
         i = 1
         for image in images:
-            image.save(path.format(i))
+            image.save(filepath.format(i))
             i += 1
