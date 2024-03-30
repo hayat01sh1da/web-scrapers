@@ -13,12 +13,8 @@ class TestImageCollector(TestApplication):
         self.image_collector = ImageCollector()
         self.filename        = 'image_{i:02}.jpg'
 
-    def test_get_images(self):
-        self.assertEqual(24, len(self.image_collector.get_images()))
-
     def test_save_images(self):
-        images = self.image_collector.get_images()
-        self.image_collector.save_images(images, self.dirname, self.filename)
+        self.image_collector.save_images(self.dirname, self.filename)
         filepath = os.path.join(self.dirname, self.filename)
         self.assertEqual(True, path.exists(filepath.format(i = 1)))
         self.assertEqual(True, path.exists(filepath.format(i = 2)))
