@@ -9,7 +9,6 @@ from info_collector import InfoCollector
 class TestInfoCollector(unittest.TestCase):
     def setUp(self):
         self.info_collector = InfoCollector()
-        self.url            = 'https://scraping-for-beginner.herokuapp.com/ranking/'
         self.titles         = []
         self.evaluations    = []
         self.rankings       = []
@@ -19,7 +18,7 @@ class TestInfoCollector(unittest.TestCase):
 
     def test_get_titles(self):
         for i in range(1, 4):
-            self.titles.append(self.info_collector.get_titles(self.url, '?page={}'.format(i)))
+            self.titles.append(self.info_collector.get_titles('?page={}'.format(i)))
         self.titles = sum(self.titles, [])
         self.assertEqual([
             '観光地 1',
@@ -56,7 +55,7 @@ class TestInfoCollector(unittest.TestCase):
 
     def test_get_evaluations(self):
         for i in range(1, 4):
-            self.evaluations.append(self.info_collector.get_evaluations(self.url, '?page={}'.format(i)))
+            self.evaluations.append(self.info_collector.get_evaluations('?page={}'.format(i)))
         self.evaluations = sum(self.evaluations, [])
         self.assertEqual([
             4.7, 4.7, 4.6, 4.5, 4.5, 4.4, 4.3, 4.3, 4.2, 4.1,
@@ -65,12 +64,12 @@ class TestInfoCollector(unittest.TestCase):
         ], self.evaluations)
 
     def test_get_categories(self):
-        self.categories = self.info_collector.get_categories(self.url)
+        self.categories = self.info_collector.get_categories()
         self.assertEqual(['楽しさ', '人混みの多さ', '景色', 'アクセス'], self.categories)
 
     def test_get_rankings(self):
         for i in range(1, 4):
-            self.rankings.append(self.info_collector.get_rankings(self.url, '?page={}'.format(i)))
+            self.rankings.append(self.info_collector.get_rankings('?page={}'.format(i)))
         self.rankings = sum(self.rankings, [])
         self.assertEqual([
             [4.6, 4.5, 4.9, 4.2],
@@ -108,18 +107,18 @@ class TestInfoCollector(unittest.TestCase):
     # Comments are shown at random every time the browser is booted, so the value of each element cannot be tested.
     def test_get_comments(self):
         for i in range(1, 4):
-            self.comments.append(self.info_collector.get_comments(self.url, '?page={}'.format(i)))
+            self.comments.append(self.info_collector.get_comments('?page={}'.format(i)))
         self.assertEqual(30, len(sum(self.comments, [])))
 
     def test_export_csv(self):
         for i in range(1, 4):
-            self.titles.append(self.info_collector.get_titles(self.url, '?page={}'.format(i)))
-            self.evaluations.append(self.info_collector.get_evaluations(self.url, '?page={}'.format(i)))
-            self.rankings.append(self.info_collector.get_rankings(self.url, '?page={}'.format(i)))
-            self.comments.append(self.info_collector.get_comments(self.url, '?page={}'.format(i)))
+            self.titles.append(self.info_collector.get_titles('?page={}'.format(i)))
+            self.evaluations.append(self.info_collector.get_evaluations('?page={}'.format(i)))
+            self.rankings.append(self.info_collector.get_rankings('?page={}'.format(i)))
+            self.comments.append(self.info_collector.get_comments('?page={}'.format(i)))
         self.titles      = sum(self.titles, [])
         self.evaluations = sum(self.evaluations, [])
-        self.categories  = self.info_collector.get_categories(self.url)
+        self.categories  = self.info_collector.get_categories()
         self.rankings    = sum(self.rankings, [])
         self.info_collector.export_csv(self.titles, self.evaluations, self.rankings, self.categories, self.export_path)
         self.assertEqual(True, path.exists(self.export_path))

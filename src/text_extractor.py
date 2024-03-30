@@ -7,9 +7,10 @@ from application import Application
 class TextExtractor(Application):
     def __init__(self):
         super().__init__()
+        self.url = '{base_url}/{path}'.format(base_url = self.base_url, path = 'login_page')
 
-    def login(self, url, user_name, pwd):
-        self.chrome.get(url)
+    def login(self, user_name, pwd):
+        self.chrome.get(self.url)
         username = self.chrome.find_element(By.ID, 'username')
         password = self.chrome.find_element(By.ID, 'password')
         login    = self.chrome.find_element(By.ID, 'login-btn')

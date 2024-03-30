@@ -7,9 +7,10 @@ from application import Application
 class ImageCollector(Application):
     def __init__(self):
         super().__init__()
+        self.url = '{base_url}/{path}'.format(base_url = self.base_url, path = 'image')
 
-    def get_images(self, url):
-        self.chrome.get(url)
+    def get_images(self):
+        self.chrome.get(self.url)
         img_divs = self.chrome.find_elements(By.CLASS_NAME, 'material-placeholder')
         img_urls = []
         for img_div in img_divs:

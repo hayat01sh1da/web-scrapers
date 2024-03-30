@@ -8,8 +8,7 @@ from text_extractor import TextExtractor
 class TestTextExtractor(unittest.TestCase):
     def setUp(self):
         self.text_extractor = TextExtractor()
-        self.url            = 'https://scraping-for-beginner.herokuapp.com/login_page'
-        self.text_extractor.login(self.url, 'imanishi', 'kohei')
+        self.text_extractor.login('imanishi', 'kohei')
         self.export_path = os.path.join('.', 'csv', 'lecturer_info.csv')
 
     def test_get_lecturer_info(self):

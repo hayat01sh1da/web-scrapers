@@ -9,38 +9,39 @@ from application import Application
 class InfoCollector(Application):
     def __init__(self):
         super().__init__()
+        self.url          = '{base_url}/{path}'.format(base_url = self.base_url, path = 'ranking')
         self.list_handler = ListHandler()
 
-    def get_titles(self, url, query_str):
-        self.__get_url__(url, query_str)
+    def get_titles(self, query_str):
+        self.__get_url__(query_str)
         elem_titles = self.chrome.find_elements(By.CLASS_NAME, 'u_title')
         titles      = []
         for elem_title in elem_titles:
             titles.append(elem_title.text.split('\n')[-1])
         return titles
 
-    def get_evaluations(self, url, query_str):
-        self.__get_url__(url, query_str)
+    def get_evaluations(self, query_str):
+        self.__get_url__(query_str)
         elem_rank_boxes = self.chrome.find_elements(By.CLASS_NAME, 'u_rankBox')
         evaluations     = []
         for elem_rank_box in elem_rank_boxes:
             evaluations.append(float(elem_rank_box.find_element(By.CLASS_NAME, 'evaluateNumber').text))
         return evaluations
 
-    def get_categories(self, url):
-        self.__get_url__(url)
+    def get_categories(self):
+        self.__get_url__()
         elem_ranking_items = self.__get_ranking_items__()
         categories         = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
         return categories[0]
 
-    def get_rankings(self, url, query_str):
-        self.__get_url__(url, query_str)
+    def get_rankings(self, query_str):
+        self.__get_url__(query_str)
         elem_ranking_items = self.__get_ranking_items__()
         rankings           = self.list_handler.class_elems_list(elem_ranking_items, 'is_rank')
         return rankings
 
-    def get_comments(self, url, query_str):
-        self.__get_url__(url, query_str)
+    def get_comments(self, query_str):
+        self.__get_url__(query_str)
         elem_ranking_items = self.__get_ranking_items__()
         comments           = self.list_handler.class_elems_list(elem_ranking_items, 'comment')
         return comments
@@ -56,8 +57,8 @@ class InfoCollector(Application):
 
     # private
 
-    def __get_url__(self, url, query_str = ''):
-        target_url = '{url}{query_str}'.format(url = url, query_str = query_str)
+    def __get_url__(self, query_str = ''):
+        target_url = '{url}{query_str}'.format(url = self.url, query_str = query_str)
         self.chrome.get(target_url)
 
     def __get_ranking_items__(self):
