@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 import pandas as pd
+import os
 import sys
 sys.path.append('./src')
 from application import Application
@@ -35,8 +36,12 @@ class TextExtractor(Application):
             profile[keys[i]] = vals[i]
         return profile, keys, vals
 
-    def export_csv(self, keys, vals, filepath):
+    def export_csv(self, keys, vals, dirname, filename):
         df         = pd.DataFrame()
         df['項目'] = keys
         df['値']   = vals
+
+        if not os.path.isdir(dirname):
+            os.makedirs(dirname)
+        filepath = os.path.join(dirname, filename)
         df.to_csv(filepath)

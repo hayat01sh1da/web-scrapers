@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 import io
 from urllib import request
 from PIL import Image
+import os
 from application import Application
 
 class ImageCollector(Application):
@@ -22,8 +23,12 @@ class ImageCollector(Application):
             images.append(image)
         return images
 
-    def save_images(self, images, filepath):
-        i = 1
+    def save_images(self, images, dirname, filename):
+        if not os.path.isdir(dirname):
+            os.makedirs(dirname)
+
+        filepath = os.path.join(dirname, filename)
+        i        = 1
         for image in images:
-            image.save(filepath.format(i))
+            image.save(filepath.format(i = i))
             i += 1

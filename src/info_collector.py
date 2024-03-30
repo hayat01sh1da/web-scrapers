@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 import pandas as pd
+import os
 import sys
 sys.path.append('./src')
 sys.path.append('./src/lib')
@@ -46,14 +47,18 @@ class InfoCollector(Application):
         comments           = self.list_handler.class_elems_list(elem_ranking_items, 'comment')
         return comments
 
-    def export_csv(self, titles, evaluations, rankings, categories, path):
+    def export_csv(self, titles, evaluations, rankings, categories, dirname, filename):
         df                  = pd.DataFrame()
         df['観光地']         = titles
         df['総合評価']       = evaluations
         df_rankings         = pd.DataFrame(rankings)
         df_rankings.columns = categories
         df                  = pd.concat([df, df_rankings], axis = 1)
-        df.to_csv(path)
+
+        if not os.path.isdir(dirname):
+            os.makedirs(dirname)
+        filepath = os.path.join(dirname, filename)
+        df.to_csv(filepath)
 
     # private
 

@@ -1,44 +1,49 @@
 import unittest
+import os
 import sys
 sys.path.append('./src')
-sys.path.append('./imgs')
+sys.path.append('./test')
 from os import path
 from image_collector import ImageCollector
+from test_application import TestApplication
 
-class TestImageCollector(unittest.TestCase):
+class TestImageCollector(TestApplication):
     def setUp(self):
+        super().setUp()
         self.image_collector = ImageCollector()
+        self.filename        = 'image_{i:02}.jpg'
 
     def test_get_images(self):
         self.assertEqual(24, len(self.image_collector.get_images()))
 
     def test_save_images(self):
         images = self.image_collector.get_images()
-        self.image_collector.save_images(images, './imgs/image_{:0=2}.jpg')
-        self.assertEqual(True, path.exists('./imgs/image_01.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_02.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_03.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_04.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_05.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_06.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_07.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_08.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_09.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_10.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_11.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_12.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_13.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_14.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_15.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_16.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_17.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_18.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_19.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_20.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_21.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_22.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_23.jpg'))
-        self.assertEqual(True, path.exists('./imgs/image_24.jpg'))
+        self.image_collector.save_images(images, self.dirname, self.filename)
+        filepath = os.path.join(self.dirname, self.filename)
+        self.assertEqual(True, path.exists(filepath.format(i = 1)))
+        self.assertEqual(True, path.exists(filepath.format(i = 2)))
+        self.assertEqual(True, path.exists(filepath.format(i = 3)))
+        self.assertEqual(True, path.exists(filepath.format(i = 4)))
+        self.assertEqual(True, path.exists(filepath.format(i = 5)))
+        self.assertEqual(True, path.exists(filepath.format(i = 6)))
+        self.assertEqual(True, path.exists(filepath.format(i = 7)))
+        self.assertEqual(True, path.exists(filepath.format(i = 8)))
+        self.assertEqual(True, path.exists(filepath.format(i = 9)))
+        self.assertEqual(True, path.exists(filepath.format(i = 10)))
+        self.assertEqual(True, path.exists(filepath.format(i = 11)))
+        self.assertEqual(True, path.exists(filepath.format(i = 12)))
+        self.assertEqual(True, path.exists(filepath.format(i = 13)))
+        self.assertEqual(True, path.exists(filepath.format(i = 14)))
+        self.assertEqual(True, path.exists(filepath.format(i = 15)))
+        self.assertEqual(True, path.exists(filepath.format(i = 16)))
+        self.assertEqual(True, path.exists(filepath.format(i = 17)))
+        self.assertEqual(True, path.exists(filepath.format(i = 18)))
+        self.assertEqual(True, path.exists(filepath.format(i = 19)))
+        self.assertEqual(True, path.exists(filepath.format(i = 20)))
+        self.assertEqual(True, path.exists(filepath.format(i = 21)))
+        self.assertEqual(True, path.exists(filepath.format(i = 22)))
+        self.assertEqual(True, path.exists(filepath.format(i = 23)))
+        self.assertEqual(True, path.exists(filepath.format(i = 24)))
 
 if __name__ == '__main__':
     unittest.main()

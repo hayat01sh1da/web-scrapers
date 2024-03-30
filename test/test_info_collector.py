@@ -5,16 +5,18 @@ sys.path.append('./src')
 sys.path.append('./src/lib')
 from os import path
 from info_collector import InfoCollector
+from test_application import TestApplication
 
-class TestInfoCollector(unittest.TestCase):
+class TestInfoCollector(TestApplication):
     def setUp(self):
+        super().setUp()
         self.info_collector = InfoCollector()
         self.titles         = []
         self.evaluations    = []
         self.rankings       = []
         self.comments       = []
         self.categories     = []
-        self.export_path    = os.path.join('.', 'csv', 'tour_reviews.csv')
+        self.filename      = 'tour_reviews.csv'
 
     def test_get_titles(self):
         for i in range(1, 4):
@@ -120,8 +122,8 @@ class TestInfoCollector(unittest.TestCase):
         self.evaluations = sum(self.evaluations, [])
         self.categories  = self.info_collector.get_categories()
         self.rankings    = sum(self.rankings, [])
-        self.info_collector.export_csv(self.titles, self.evaluations, self.rankings, self.categories, self.export_path)
-        self.assertEqual(True, path.exists(self.export_path))
+        self.info_collector.export_csv(self.titles, self.evaluations, self.rankings, self.categories, self.dirname, self.filename)
+        self.assertEqual(True, path.exists(os.path.join(self.dirname, self.filename)))
 
 if __name__ == '__main__':
     unittest.main()
