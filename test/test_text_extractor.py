@@ -1,5 +1,6 @@
 import unittest
 import os
+import csv
 import sys
 sys.path.append('./src')
 from os import path
@@ -13,20 +14,22 @@ class TestTextExtractor(TestApplication):
         self.text_extractor.login('imanishi', 'kohei')
         self.filename = 'lecturer_info.csv'
 
-    def test_get_lecturer_info(self):
-        profile, *_ = self.text_extractor.get_lecturer_info()
-        self.assertEqual({
-            '講師名': '今西 航平',
-            '所属企業': '株式会社キカガク',
-            '生年月日': '1994年7月15日',
-            '出身': '千葉県',
-            '趣味': 'バスケットボール、読書、ガジェット集め'
-        }, profile)
-
-    def test_export_csv(self):
-        _, keys, vals = self.text_extractor.get_lecturer_info()
-        self.text_extractor.export_csv(keys, vals, self.dirname, self.filename)
-        self.assertEqual(True, path.exists(os.path.join(self.dirname, self.filename)))
+    def test_save_csv(self):
+        self.text_extractor.save_csv(self.dirname, self.filename)
+        filepath     = os.path.join(os.path.join(self.dirname, self.filename))
+        lecture_info = []
+        with open(filepath) as f:
+            items = csv.DictReader(f)
+            for item in items:
+                lecture_info.append(item)
+        self.assertEqual(True, path.exists(filepath))
+        self.assertEqual([
+                {'': '0', '項目': '講師名', '値': '今西 航平'},
+                {'': '1', '項目': '所属企業', '値': '株式会社キカガク'},
+                {'': '2', '項目': '生年月日', '値': '1994年7月15日'},
+                {'': '3', '項目': '出身', '値': '千葉県'},
+                {'': '4', '項目': '趣味', '値': 'バスケットボール、読書、ガジェット集め'}
+            ], lecture_info)
 
 if __name__ == '__main__':
     unittest.main()

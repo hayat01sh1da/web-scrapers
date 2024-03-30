@@ -19,7 +19,20 @@ class TextExtractor(Application):
         password.send_keys(pwd)
         login.click()
 
-    def get_lecturer_info(self):
+    def save_csv(self, dirname, filename):
+        keys, values = self.__get_lecturer_info__()
+        df         = pd.DataFrame()
+        df['項目'] = keys
+        df['値']   = values
+
+        if not os.path.isdir(dirname):
+            os.makedirs(dirname)
+        filepath = os.path.join(dirname, filename)
+        df.to_csv(filepath)
+
+    # private
+
+    def __get_lecturer_info__(self):
         ths  = self.chrome.find_elements(By.TAG_NAME, 'th')
         keys = []
         for th in ths:
@@ -31,17 +44,4 @@ class TextExtractor(Application):
                 vals.append(td.text.replace('\n', '、'))
             else:
                 vals.append(td.text)
-        profile = {}
-        for i in range(len(keys)):
-            profile[keys[i]] = vals[i]
-        return profile, keys, vals
-
-    def export_csv(self, keys, vals, dirname, filename):
-        df         = pd.DataFrame()
-        df['項目'] = keys
-        df['値']   = vals
-
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
-        filepath = os.path.join(dirname, filename)
-        df.to_csv(filepath)
+        return keys, vals
