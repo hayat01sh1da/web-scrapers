@@ -1,5 +1,6 @@
-import os
 import unittest
+import os
+import csv
 import sys
 sys.path.append('./src')
 sys.path.append('./src/lib')
@@ -11,119 +12,50 @@ class TestInfoCollector(TestApplication):
     def setUp(self):
         super().setUp()
         self.info_collector = InfoCollector()
-        self.titles         = []
-        self.evaluations    = []
-        self.rankings       = []
-        self.comments       = []
-        self.categories     = []
-        self.filename      = 'tour_reviews.csv'
+        self.filename       = 'tour_reviews.csv'
 
-    def test_get_titles(self):
-        for i in range(1, 4):
-            self.titles.append(self.info_collector.get_titles('?page={}'.format(i)))
-        self.titles = sum(self.titles, [])
+    def test_save_csv(self):
+        self.info_collector.save_csv(self.dirname, self.filename)
+        filepath      = os.path.join(self.dirname, self.filename)
+        tour_reviews = []
+        with open(filepath) as f:
+            _tour_reviews = csv.DictReader(f)
+            for tour_review in _tour_reviews:
+                tour_reviews.append(tour_review)
+        self.assertEqual(True, path.exists(filepath))
         self.assertEqual([
-            '観光地 1',
-            '観光地 2',
-            '観光地 3',
-            '観光地 4',
-            '観光地 5',
-            '観光地 6',
-            '観光地 7',
-            '観光地 8',
-            '観光地 9',
-            '観光地 10',
-            '観光地 11',
-            '観光地 12',
-            '観光地 13',
-            '観光地 14',
-            '観光地 15',
-            '観光地 16',
-            '観光地 17',
-            '観光地 18',
-            '観光地 19',
-            '観光地 20',
-            '観光地 21',
-            '観光地 22',
-            '観光地 23',
-            '観光地 24',
-            '観光地 25',
-            '観光地 26',
-            '観光地 27',
-            '観光地 28',
-            '観光地 29',
-            '観光地 30',
-        ], self.titles)
+            {'': '0', '観光地': '観光地 1', '総合評価': '4.7', '楽しさ': '4.6', '人混みの多さ': '4.5', '景色': '4.9', 'アクセス': '4.2'},
+            {'': '1', '観光地': '観光地 2', '総合評価': '4.7', '楽しさ': '4.6', '人混みの多さ': '4.5', '景色': '4.9', 'アクセス': '4.2'},
+            {'': '2', '観光地': '観光地 3', '総合評価': '4.6', '楽しさ': '4.5', '人混みの多さ': '4.4', '景色': '4.8', 'アクセス': '4.1'},
+            {'': '3', '観光地': '観光地 4', '総合評価': '4.5', '楽しさ': '4.4', '人混みの多さ': '4.4', '景色': '4.8', 'アクセス': '4.0'},
+            {'': '4', '観光地': '観光地 5', '総合評価': '4.5', '楽しさ': '4.4', '人混みの多さ': '4.3', '景色': '4.7', 'アクセス': '4.0'},
+            {'': '5', '観光地': '観光地 6', '総合評価': '4.4', '楽しさ': '4.3', '人混みの多さ': '4.3', '景色': '4.7', 'アクセス': '3.9'},
+            {'': '6', '観光地': '観光地 7', '総合評価': '4.3', '楽しさ': '4.2', '人混みの多さ': '4.2', '景色': '4.6', 'アクセス': '3.8'},
+            {'': '7', '観光地': '観光地 8', '総合評価': '4.3', '楽しさ': '4.2', '人混みの多さ': '4.2', '景色': '4.6', 'アクセス': '3.8'},
+            {'': '8', '観光地': '観光地 9', '総合評価': '4.2', '楽しさ': '4.1', '人混みの多さ': '4.1', '景色': '4.5', 'アクセス': '3.7'},
+            {'': '9', '観光地': '観光地 10', '総合評価': '4.1', '楽しさ': '4.0', '人混みの多さ': '4.1', '景色': '4.4', 'アクセス': '3.6'},
+            {'': '10', '観光地': '観光地 11', '総合評価': '4.1', '楽しさ': '4.0', '人混みの多さ': '4.0', '景色': '4.4', 'アクセス': '3.6'},
+            {'': '11', '観光地': '観光地 12', '総合評価': '4.0', '楽しさ': '3.9', '人混みの多さ': '4.0', '景色': '4.3', 'アクセス': '3.5'},
+            {'': '12', '観光地': '観光地 13', '総合評価': '3.9', '楽しさ': '3.8', '人混みの多さ': '3.9', '景色': '4.3', 'アクセス': '3.4'},
+            {'': '13', '観光地': '観光地 14', '総合評価': '3.9', '楽しさ': '3.8', '人混みの多さ': '3.9', '景色': '4.2', 'アクセス': '3.4'},
+            {'': '14', '観光地': '観光地 15', '総合評価': '3.8', '楽しさ': '3.7', '人混みの多さ': '3.8', '景色': '4.2', 'アクセス': '3.3'},
+            {'': '15', '観光地': '観光地 16', '総合評価': '3.7', '楽しさ': '3.6', '人混みの多さ': '3.8', '景色': '4.1', 'アクセス': '3.2'},
+            {'': '16', '観光地': '観光地 17', '総合評価': '3.7', '楽しさ': '3.6', '人混みの多さ': '3.7', '景色': '4.1', 'アクセス': '3.2'},
+            {'': '17', '観光地': '観光地 18', '総合評価': '3.6', '楽しさ': '3.5', '人混みの多さ': '3.7', '景色': '4.0', 'アクセス': '3.1'},
+            {'': '18', '観光地': '観光地 19', '総合評価': '3.5', '楽しさ': '3.4', '人混みの多さ': '3.6', '景色': '3.9', 'アクセス': '3.0'},
+            {'': '19', '観光地': '観光地 20', '総合評価': '3.5', '楽しさ': '3.4', '人混みの多さ': '3.6', '景色': '3.9', 'アクセス': '3.0'},
+            {'': '20', '観光地': '観光地 21', '総合評価': '3.4', '楽しさ': '3.3', '人混みの多さ': '3.5', '景色': '3.8', 'アクセス': '2.9'},
+            {'': '21', '観光地': '観光地 22', '総合評価': '3.3', '楽しさ': '3.2', '人混みの多さ': '3.5', '景色': '3.8', 'アクセス': '2.8'},
+            {'': '22', '観光地': '観光地 23', '総合評価': '3.3', '楽しさ': '3.2', '人混みの多さ': '3.4', '景色': '3.7', 'アクセス': '2.8'},
+            {'': '23', '観光地': '観光地 24', '総合評価': '3.2', '楽しさ': '3.1', '人混みの多さ': '3.4', '景色': '3.7', 'アクセス': '2.7'},
+            {'': '24', '観光地': '観光地 25', '総合評価': '3.1', '楽しさ': '3.0', '人混みの多さ': '3.3', '景色': '3.6', 'アクセス': '2.6'},
+            {'': '25', '観光地': '観光地 26', '総合評価': '3.1', '楽しさ': '3.0', '人混みの多さ': '3.3', '景色': '3.6', 'アクセス': '2.6'},
+            {'': '26', '観光地': '観光地 27', '総合評価': '3.0', '楽しさ': '2.9', '人混みの多さ': '3.2', '景色': '3.5', 'アクセス': '2.5'},
+            {'': '27', '観光地': '観光地 28', '総合評価': '2.9', '楽しさ': '2.8', '人混みの多さ': '3.2', '景色': '3.4', 'アクセス': '2.4'},
+            {'': '28', '観光地': '観光地 29', '総合評価': '2.9', '楽しさ': '2.8', '人混みの多さ': '3.1', '景色': '3.4', 'アクセス': '2.4'},
+            {'': '29', '観光地': '観光地 30', '総合評価': '2.8', '楽しさ': '2.7', '人混みの多さ': '3.1', '景色': '3.3', 'アクセス': '2.3'}
+        ], tour_reviews)
 
-    def test_get_evaluations(self):
-        for i in range(1, 4):
-            self.evaluations.append(self.info_collector.get_evaluations('?page={}'.format(i)))
-        self.evaluations = sum(self.evaluations, [])
-        self.assertEqual([
-            4.7, 4.7, 4.6, 4.5, 4.5, 4.4, 4.3, 4.3, 4.2, 4.1,
-            4.1, 4.0, 3.9, 3.9, 3.8, 3.7, 3.7, 3.6, 3.5, 3.5,
-            3.4, 3.3, 3.3, 3.2, 3.1, 3.1, 3.0, 2.9, 2.9, 2.8
-        ], self.evaluations)
-
-    def test_get_categories(self):
-        self.categories = self.info_collector.get_categories()
-        self.assertEqual(['楽しさ', '人混みの多さ', '景色', 'アクセス'], self.categories)
-
-    def test_get_rankings(self):
-        for i in range(1, 4):
-            self.rankings.append(self.info_collector.get_rankings('?page={}'.format(i)))
-        self.rankings = sum(self.rankings, [])
-        self.assertEqual([
-            [4.6, 4.5, 4.9, 4.2],
-            [4.6, 4.5, 4.9, 4.2],
-            [4.5, 4.4, 4.8, 4.1],
-            [4.4, 4.4, 4.8, 4.0],
-            [4.4, 4.3, 4.7, 4.0],
-            [4.3, 4.3, 4.7, 3.9],
-            [4.2, 4.2, 4.6, 3.8],
-            [4.2, 4.2, 4.6, 3.8],
-            [4.1, 4.1, 4.5, 3.7],
-            [4.0, 4.1, 4.4, 3.6],
-            [4.0, 4.0, 4.4, 3.6],
-            [3.9, 4.0, 4.3, 3.5],
-            [3.8, 3.9, 4.3, 3.4],
-            [3.8, 3.9, 4.2, 3.4],
-            [3.7, 3.8, 4.2, 3.3],
-            [3.6, 3.8, 4.1, 3.2],
-            [3.6, 3.7, 4.1, 3.2],
-            [3.5, 3.7, 4.0, 3.1],
-            [3.4, 3.6, 3.9, 3.0],
-            [3.4, 3.6, 3.9, 3.0],
-            [3.3, 3.5, 3.8, 2.9],
-            [3.2, 3.5, 3.8, 2.8],
-            [3.2, 3.4, 3.7, 2.8],
-            [3.1, 3.4, 3.7, 2.7],
-            [3.0, 3.3, 3.6, 2.6],
-            [3.0, 3.3, 3.6, 2.6],
-            [2.9, 3.2, 3.5, 2.5],
-            [2.8, 3.2, 3.4, 2.4],
-            [2.8, 3.1, 3.4, 2.4],
-            [2.7, 3.1, 3.3, 2.3]
-        ], self.rankings)
-
-    # Comments are shown at random every time the browser is booted, so the value of each element cannot be tested.
-    def test_get_comments(self):
-        for i in range(1, 4):
-            self.comments.append(self.info_collector.get_comments('?page={}'.format(i)))
-        self.assertEqual(30, len(sum(self.comments, [])))
-
-    def test_export_csv(self):
-        for i in range(1, 4):
-            self.titles.append(self.info_collector.get_titles('?page={}'.format(i)))
-            self.evaluations.append(self.info_collector.get_evaluations('?page={}'.format(i)))
-            self.rankings.append(self.info_collector.get_rankings('?page={}'.format(i)))
-            self.comments.append(self.info_collector.get_comments('?page={}'.format(i)))
-        self.titles      = sum(self.titles, [])
-        self.evaluations = sum(self.evaluations, [])
-        self.categories  = self.info_collector.get_categories()
-        self.rankings    = sum(self.rankings, [])
-        self.info_collector.export_csv(self.titles, self.evaluations, self.rankings, self.categories, self.dirname, self.filename)
-        self.assertEqual(True, path.exists(os.path.join(self.dirname, self.filename)))
 
 if __name__ == '__main__':
     unittest.main()
