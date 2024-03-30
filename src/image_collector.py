@@ -2,13 +2,11 @@ from selenium.webdriver.common.by import By
 import io
 from urllib import request
 from PIL import Image
-import sys
-sys.path.append('./src/lib')
-from chrome_driver import ChromeDriver
+from application import Application
 
-class ImageCollector:
+class ImageCollector(Application):
     def __init__(self):
-        self.chrome = ChromeDriver().webdriver
+        super().__init__()
 
     def get_images(self, url):
         self.chrome.get(url)

@@ -1,13 +1,14 @@
 from selenium.webdriver.common.by import By
 import pandas as pd
 import sys
+sys.path.append('./src')
 sys.path.append('./src/lib')
 from list_handler import ListHandler
-from chrome_driver import ChromeDriver
+from application import Application
 
-class InfoCollector:
+class InfoCollector(Application):
     def __init__(self):
-        self.chrome       = ChromeDriver().webdriver
+        super().__init__()
         self.list_handler = ListHandler()
 
     def get_titles(self, url, query_str):

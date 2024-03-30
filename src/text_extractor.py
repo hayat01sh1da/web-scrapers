@@ -1,12 +1,12 @@
 from selenium.webdriver.common.by import By
 import pandas as pd
 import sys
-sys.path.append('./src/lib')
-from chrome_driver import ChromeDriver
+sys.path.append('./src')
+from application import Application
 
-class TextExtractor:
+class TextExtractor(Application):
     def __init__(self):
-        self.chrome = ChromeDriver().webdriver
+        super().__init__()
 
     def login(self, url, user_name, pwd):
         self.chrome.get(url)
