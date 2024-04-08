@@ -65,28 +65,28 @@ ChromeDriver was started successfully.
 ## 8. Run Unit Tests
 
 ```command
-$ python test/test_application.py
+$ python ./test/test_application.py
 ..
 ----------------------------------------------------------------------
 Ran 2 tests in 2.197s
 
 OK
 
-$ python test/test_image_collector.py
+$ python ./test/test_image_collector.py
 .....
 ----------------------------------------------------------------------
 Ran 5 tests in 45.932s
 
 OK
 
-$ python test/test_info_collector.py 
+$ python ./test/test_info_collector.py 
 .....
 ----------------------------------------------------------------------
 Ran 5 tests in 13.142s
 
 OK
 
-$ python test/test_pillow_sample.py
+$ python ./test/test_pillow_sample.py
 .../home/hayat01sh1da/.pyenv/versions/3.12.2/lib/python3.12/unittest/suite.py:107: ResourceWarning: unclosed file <_io.BufferedReader name='./imgs/bird.jpg'>
   for index, test in enumerate(self):
 ResourceWarning: Enable tracemalloc to get the object allocation traceback
@@ -99,7 +99,7 @@ Ran 7 tests in 7.664s
 
 OK
 
-$ python test/test_text_extractor.py
+$ python ./test/test_text_extractor.py
 .....
 ----------------------------------------------------------------------
 Ran 5 tests in 11.330s
