@@ -1,7 +1,7 @@
 ## 1. Environment
 
-* WSL(Ubuntu 20.04.6 LTS)
-* Python 3.12.3
+- WSL(Ubuntu 20.04.6 LTS)
+- Python 3.12.3
 
 ## 2. Reference
 
@@ -9,10 +9,10 @@ PythonによるWebスクレイピング \.入門編\. 業務効率化への第�
 
 ## 3. Sample Websites for Web Scraping
 
-* [ログイン - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/login_page)
-* [講師情報 - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/mypage)
-* [ランキング - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/ranking/)
-* [画像 - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/image)
+- [ログイン - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/login_page)
+- [講師情報 - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/mypage)
+- [ランキング - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/ranking/)
+- [画像 - Webスクレイピング入門](https://scraping-for-beginner.herokuapp.com/image)
 
 ## 4. Install Chrome Browser(WSL Users Only)
 
