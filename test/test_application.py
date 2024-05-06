@@ -19,13 +19,7 @@ class TestApplication(unittest.TestCase):
         self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
 
     def tearDown(self):
-        if self.__has_json_file__():
-            shutil.rmtree(self.dirname)
-
-    # private
-
-    def __has_json_file__(self):
-        return len(glob.glob(os.path.join(self.dirname, '*'))) >= 1
+        shutil.rmtree(self.dirname)
 
 if __name__ == '__main__':
     unittest.main()
