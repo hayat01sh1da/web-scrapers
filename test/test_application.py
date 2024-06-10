@@ -13,10 +13,12 @@ class TestApplication(unittest.TestCase):
         self.dirname     = os.path.join('.', 'test', 'tmp')
 
     def test_webdriver(self):
-        self.assertEqual("<class 'selenium.webdriver.chrome.webdriver.WebDriver'>", str(type(self.application.chrome)))
+        if type(self) is TestApplication:
+            self.assertEqual("<class 'selenium.webdriver.chrome.webdriver.WebDriver'>", str(type(self.application.chrome)))
 
     def test_base_url(self):
-        self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
+        if type(self) is TestApplication:
+            self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
 
     def tearDown(self):
         shutil.rmtree(self.dirname)
