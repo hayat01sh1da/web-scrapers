@@ -11,6 +11,8 @@ class TestApplication(unittest.TestCase):
     def setUp(self):
         self.application = Application()
         self.dirname     = os.path.join('.', 'test', 'tmp')
+        if not os.path.isdir(self.dirname):
+            os.makedirs(self.dirname)
 
     def test_webdriver(self):
         if type(self) is TestApplication:
@@ -21,7 +23,10 @@ class TestApplication(unittest.TestCase):
             self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
 
     def tearDown(self):
-        shutil.rmtree(self.dirname)
+        if type(self) is TestApplication:
+            pass
+        else:
+            shutil.rmtree(self.dirname)
 
 if __name__ == '__main__':
     unittest.main()
