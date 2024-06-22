@@ -21,9 +21,9 @@ class TextExtractor(Application):
 
     def save_csv(self, dirname, filename):
         keys, values = self.__get_lecturer_info__()
-        df         = pd.DataFrame()
-        df['項目'] = keys
-        df['値']   = values
+        df           = pd.DataFrame()
+        df['項目']    = keys
+        df['値']     = values
 
         if not os.path.isdir(dirname):
             os.makedirs(dirname)

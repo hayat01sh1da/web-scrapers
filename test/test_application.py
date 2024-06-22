@@ -11,21 +11,22 @@ class TestApplication(unittest.TestCase):
     def setUp(self):
         self.application = Application()
         self.dirname     = os.path.join('.', 'test', 'tmp')
+        if not os.path.isdir(self.dirname):
+            os.makedirs(self.dirname)
 
     def test_webdriver(self):
-        self.assertEqual("<class 'selenium.webdriver.chrome.webdriver.WebDriver'>", str(type(self.application.chrome)))
+        if type(self) is TestApplication:
+            self.assertEqual("<class 'selenium.webdriver.chrome.webdriver.WebDriver'>", str(type(self.application.chrome)))
 
     def test_base_url(self):
-        self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
+        if type(self) is TestApplication:
+            self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
 
     def tearDown(self):
-        if self.__has_json_file__():
+        if type(self) is TestApplication:
+            pass
+        else:
             shutil.rmtree(self.dirname)
-
-    # private
-
-    def __has_json_file__(self):
-        return len(glob.glob(os.path.join(self.dirname, '*'))) >= 1
 
 if __name__ == '__main__':
     unittest.main()
