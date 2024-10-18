@@ -15,14 +15,6 @@ class TestApplication(unittest.TestCase):
             os.makedirs(self.dirname)
         self.pycaches = glob.glob(os.path.join('.', '**', '__pycache__'))
 
-    def test_webdriver(self):
-        if type(self) is TestApplication:
-            self.assertEqual("<class 'selenium.webdriver.chrome.webdriver.WebDriver'>", str(type(self.application.chrome)))
-
-    def test_base_url(self):
-        if type(self) is TestApplication:
-            self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
-
     def tearDown(self):
         if type(self) is TestApplication:
             for pycache in self.pycaches:
@@ -34,6 +26,14 @@ class TestApplication(unittest.TestCase):
             for pycache in self.pycaches:
                 if os.path.isdir(pycache):
                     shutil.rmtree(pycache)
+
+    def test_webdriver(self):
+        if type(self) is TestApplication:
+            self.assertEqual("<class 'selenium.webdriver.chrome.webdriver.WebDriver'>", str(type(self.application.chrome)))
+
+    def test_base_url(self):
+        if type(self) is TestApplication:
+            self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
 
 if __name__ == '__main__':
     unittest.main()
