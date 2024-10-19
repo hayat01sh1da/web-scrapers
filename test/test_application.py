@@ -13,7 +13,7 @@ class TestApplication(unittest.TestCase):
         self.dirname     = os.path.join('.', 'test', 'tmp')
         if not os.path.isdir(self.dirname):
             os.makedirs(self.dirname)
-        self.pycaches = glob.glob(os.path.join('.', '**', '__pycache__'))
+        self.pycaches = glob.glob(os.path.join('.', '**', '__pycache__'), recursive = True)
 
     def tearDown(self):
         if type(self) is TestApplication:
