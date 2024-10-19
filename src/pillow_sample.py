@@ -13,7 +13,7 @@ class PillowSample(Application):
         return self.image.resize(size).size
 
     def save_image(self, dirname, filename):
-        if not os.path.isdir(dirname):
+        if not os.path.exists(dirname):
             os.makedirs(dirname)
         filepath = os.path.join(dirname, filename)
         self.image.save(filepath)

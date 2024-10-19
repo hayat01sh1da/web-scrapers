@@ -25,7 +25,7 @@ class TextExtractor(Application):
         df['項目']    = keys
         df['値']     = values
 
-        if not os.path.isdir(dirname):
+        if not os.path.exists(dirname):
             os.makedirs(dirname)
         filepath = os.path.join(dirname, filename)
         df.to_csv(filepath)

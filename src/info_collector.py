@@ -34,7 +34,7 @@ class InfoCollector(Application):
         df_rankings.columns = self.__get_categories__()
         df                  = pd.concat([df, df_rankings], axis = 1)
 
-        if not os.path.isdir(dirname):
+        if not os.path.exists(dirname):
             os.makedirs(dirname)
         filepath = os.path.join(dirname, filename)
         df.to_csv(filepath)

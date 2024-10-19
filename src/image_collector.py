@@ -11,7 +11,7 @@ class ImageCollector(Application):
         self.url = '{base_url}/{path}'.format(base_url = self.base_url, path = 'image')
 
     def save_images(self, dirname, filename):
-        if not os.path.isdir(dirname):
+        if not os.path.exists(dirname):
             os.makedirs(dirname)
 
         filepath = os.path.join(dirname, filename)
