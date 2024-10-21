@@ -71,46 +71,19 @@ Please see https://chromedriver.chromium.org/security-considerations for suggest
 ChromeDriver was started successfully.
 ```
 
-## 8. Run Unit Tests
+## 8. Bulk Execution of Unit Tests
 
 ```command
-$ python ./test/test_application.py
-..
-----------------------------------------------------------------------
-Ran 2 tests in 2.197s
-
-OK
-
-$ python ./test/test_image_collector.py
-.....
-----------------------------------------------------------------------
-Ran 5 tests in 45.932s
-
-OK
-
-$ python ./test/test_info_collector.py 
-.....
-----------------------------------------------------------------------
-Ran 5 tests in 13.142s
-
-OK
-
-$ python ./test/test_pillow_sample.py
-.../Users/01045255/.pyenv/versions/3.12.4/lib/python3.12/unittest/suite.py:107: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/01045255/Documents/development/private/web/web-scrapers/imgs/bird.jpg'>
+$ python -m unittest discover ./test
+.............../home/hayat01sh1da/.pyenv/versions/3.13.0/lib/python3.13/unittest/suite.py:107: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/c/Users/binlh/Documents/web/web-scrapers/imgs/bird.jpg'>
   for index, test in enumerate(self):
 ResourceWarning: Enable tracemalloc to get the object allocation traceback
-..../Users/01045255/.pyenv/versions/3.12.4/lib/python3.12/unittest/suite.py:84: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/01045255/Documents/development/private/web/web-scrapers/imgs/bird.jpg'>
+..../home/hayat01sh1da/.pyenv/versions/3.13.0/lib/python3.13/unittest/suite.py:84: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/c/Users/binlh/Documents/web/web-scrapers/imgs/bird.jpg'>
   return self.run(*args, **kwds)
 ResourceWarning: Enable tracemalloc to get the object allocation traceback
-
-----------------------------------------------------------------------
-Ran 7 tests in 7.664s
-
-OK
-
-$ python ./test/test_text_extractor.py
 .....
 ----------------------------------------------------------------------
-Ran 5 tests in 11.330s
+Ran 24 tests in 74.834s
 
 OK
+```
