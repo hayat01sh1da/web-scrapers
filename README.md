@@ -32,7 +32,7 @@ $ sudo apt update && sudo apt install -y google-chrome-stable
 $ wget https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.141/linux64/chromedriver-linux64.zip -P ./webdrivers/ && \\
     cd ./webdrivers/ && \\
     unzip chromedriver-linux64.zip && \\
-    mv chromedriver-linux64/chromedriver chromedriver-for-linux && \\
+    mv chromedriver-linux64/chromedriver chromedriver && \\
     rm -rf chromedriver-linux64*
 
 # For Mac Users
