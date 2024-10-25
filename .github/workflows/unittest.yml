@@ -33,22 +33,20 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Install Google Chrome
+      - name: Set up Google Chrome
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: 130.0.6723.69
           install-dependencies: true
-      - name: Install chromedriver
-        run: |
-          apt-get update && apt-get install -y unzip
-          wget https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.141/linux64/chromedriver-linux64.zip -P ./webdrivers/
-          cd ./webdrivers/
-          unzip chromedriver-linux64.zip
-          mv chromedriver-linux64/chromedriver chromedriver
-          rm -rf chromedriver-linux64*
-      - name: Make chromedriver Listening
-        env:
-          PATH_TO_WEBDRIVER: ./webdrivers/chromedriver
-        run: '$PATH_TO_WEBDRIVER'
+      - name: Set up chromedriver
+        uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: 130.0.6723.69
+          run: |
+            export DISPLAY=:99
+            chromedriver --url-base=/wd/hub &
       - name: Run UnitTest
-        run: python -m unittest discover ./test
+        run: |
+          echo 'export PATH_TO_WEBDRIVER=/usr/local/bin/chromedriver' >> ~/.bash_profile
+          source ~/.bash_profile
+          python -m unittest discover ./test
