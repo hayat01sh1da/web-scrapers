@@ -19,10 +19,7 @@ PythonによるWebスクレイピング \.入門編\. 業務効率化への第�
 This step is required for the webdriver to avoid failure to find binary of Chrome.
 
 ```command
-$ sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-$ sudo chmod -R 777 /dev/null
-$ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/google.gpg > /dev/null
-$ sudo apt update && sudo apt install -y google-chrome-stable
+$ sudo apt update && sudo apt install -y chromium
 ```
 
 ## 5. Download Chrome Webdriver
