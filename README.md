@@ -44,10 +44,10 @@ $ wget https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.141/m
 
 ```bash
 # For Linux(WSL) Users
-echo 'export PATH_TO_WEBDRIVER="./webdrivers/chromedriver-for-linux"' >> ~/.bash_profile
+echo 'export PATH_TO_WEBDRIVER="./webdrivers/chromedriver"' >> ~/.bash_profile
 
 # For Mac Users
-echo 'export PATH_TO_WEBDRIVER="./webdrivers/chromedriver-for-mac"' >> ~/.zprofile
+echo 'export PATH_TO_WEBDRIVER="./webdrivers/chromedriver"' >> ~/.zprofile
 ```
 
 ## 7. Make Webdriver Ready for Web Scraping
