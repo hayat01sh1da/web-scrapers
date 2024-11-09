@@ -8,16 +8,16 @@ on:
     branches:
       - master
     paths:
-      - '!./LICENCE.txt'
-      - '!./REAMDE.md'
-      - '!./requirements.txt'
+      - '.github/workflows/unittest.yml'
+      - 'requirements.txt'
+      - '**.py'
   pull_request:
     branches:
       - master
     paths:
-      - '!./LICENCE.txt'
-      - '!./REAMDE.md'
-      - '!./requirements.txt'
+      - '.github/workflows/unittest.yml'
+      - 'requirements.txt'
+      - '**.py'
 
 permissions:
   contents: read
