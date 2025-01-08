@@ -33,15 +33,18 @@ class TextExtractor(Application):
     # private
 
     def __get_lecturer_info__(self):
+        keys   = []
+        values = []
+
         ths  = self.chrome.find_elements(By.TAG_NAME, 'th')
-        keys = []
         for th in ths:
             keys.append(th.text)
-        tds  = self.chrome.find_elements(By.TAG_NAME, 'td')
-        vals = []
+
+        tds    = self.chrome.find_elements(By.TAG_NAME, 'td')
         for td in tds:
             if '\n' in td.text:
-                vals.append(td.text.replace('\n', '、'))
+                values.append(td.text.replace('\n', '、'))
             else:
-                vals.append(td.text)
-        return keys, vals
+                values.append(td.text)
+
+        return keys, values
