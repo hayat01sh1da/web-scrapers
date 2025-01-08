@@ -29,14 +29,14 @@ $ sudo apt update && sudo apt install -y google-chrome-stable
 
 ```command
 # For Linux(WSL) Users
-$ wget https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.141/linux64/chromedriver-linux64.zip -P ./webdrivers/ && \\
+$ wget https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.264/linux64/chromedriver-linux64.zip -P ./webdrivers/ && \\
     cd ./webdrivers/ && \\
     unzip chromedriver-linux64.zip && \\
     mv chromedriver-linux64/chromedriver chromedriver && \\
     rm -rf chromedriver-linux64*
 
 # For Mac Users
-$ wget https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.141/mac-arm64/chromedriver-mac-arm64.zip -P ./webdrivers/ && \\
+$ wget https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.264/mac-arm64/chromedriver-mac-arm64.zip -P ./webdrivers/ && \\
     cd ./webdrivers/ && \\
     unzip chromedriver-mac-arm64.zip && \\
     mv chromedriver-mac-arm64/chromedriver chromedriver-for-mac && \\
@@ -58,7 +58,7 @@ echo 'export PATH_TO_WEBDRIVER="./webdrivers/chromedriver"' >> ~/.zprofile
 ```command
 $ sudo apt install libnss3-dev
 $ webdrivers/chromedriver
-Starting ChromeDriver 131.0.6778.204 (52183f9e99a61056f9b78535f53d256f1516f2a0-refs/branch-heads/6778_155@{#7}) on port 0
+Starting ChromeDriver 131.0.6778.264 (52183f9e99a61056f9b78535f53d256f1516f2a0-refs/branch-heads/6778_155@{#7}) on port 0
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
 ChromeDriver was started successfully on port 35997.
