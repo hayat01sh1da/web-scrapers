@@ -56,19 +56,12 @@ echo 'export PATH_TO_WEBDRIVER="./webdrivers/chromedriver"' >> ~/.zprofile
 ## 7. Make Webdriver Ready for Web Scraping
 
 ```command
-# For Linux(WSL) Users
-$ webdrivers/chromedriver-for-linux
-Starting ChromeDriver 125.0.6422.141 (6b4b19e9dfbb93aa414dc045bd445287977d8d7a-refs/branch-heads/6312_46@{#3}) on port 9515
+$ sudo apt install libnss3-dev
+$ webdrivers/chromedriver
+Starting ChromeDriver 131.0.6778.204 (52183f9e99a61056f9b78535f53d256f1516f2a0-refs/branch-heads/6778_155@{#7}) on port 0
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
-ChromeDriver was started successfully.
-
-# For Mac Users
-$ webdrivers/chromedriver-for-mac
-Starting ChromeDriver 125.0.6422.141 (6b4b19e9dfbb93aa414dc045bd445287977d8d7a-refs/branch-heads/6312_46@{#3}) on port 9515
-Only local connections are allowed.
-Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
-ChromeDriver was started successfully.
+ChromeDriver was started successfully on port 35997.
 ```
 
 ## 8. Bulk Execution of Unit Tests
