@@ -46,7 +46,7 @@ jobs:
       - name: Set up Google Chrome
         uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: 130.0.6723.69
+          chrome-version: 131.0.6778.264
           install-dependencies: true
       - name: Set up chromedriver
         uses: nanasess/setup-chromedriver@v2
