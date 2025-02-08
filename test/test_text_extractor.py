@@ -16,12 +16,12 @@ class TestTextExtractor(TestApplication):
 
     def test_save_csv(self):
         self.text_extractor.save_csv(self.dirname, self.filename)
-        filepath     = os.path.join(os.path.join(self.dirname, self.filename))
-        lecture_info = []
+        filepath      = os.path.join(os.path.join(self.dirname, self.filename))
+        lecturer_info = []
         with open(filepath) as f:
             items = csv.DictReader(f)
             for item in items:
-                lecture_info.append(item)
+                lecturer_info.append(item)
         self.assertEqual(True, path.exists(filepath))
         self.assertEqual([
                 {'': '0', '項目': '講師名', '値': '今西 航平'},
@@ -29,7 +29,7 @@ class TestTextExtractor(TestApplication):
                 {'': '2', '項目': '生年月日', '値': '1994年7月15日'},
                 {'': '3', '項目': '出身', '値': '千葉県'},
                 {'': '4', '項目': '趣味', '値': 'バスケットボール、読書、ガジェット集め'}
-            ], lecture_info)
+            ], lecturer_info)
 
 if __name__ == '__main__':
     unittest.main()
