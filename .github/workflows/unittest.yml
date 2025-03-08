@@ -8,12 +8,12 @@ on:
     paths:
       - '.github/workflows/unittest.yml'
       - 'requirements.txt'
-      - '**.py'
+      - 'python/**/*.rb'
   pull_request:
     paths:
       - '.github/workflows/unittest.yml'
       - 'requirements.txt'
-      - '**.py'
+      - 'python/**/*.rb'
 
 permissions:
   contents: read
