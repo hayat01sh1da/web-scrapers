@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 import os
 import sys
@@ -8,7 +10,8 @@ from application import Application
 class TextExtractor(Application):
     def __init__(self):
         super().__init__()
-        self.url = '{base_url}/{path}'.format(base_url = self.base_url, path = 'login_page')
+        self.url    = '{base_url}/{path}'.format(base_url = self.base_url, path = 'login_page')
+        self.waiter = WebDriverWait(self.chrome, 10)
 
     def login(self, user_name, pwd):
         self.chrome.get(self.url)
@@ -18,6 +21,7 @@ class TextExtractor(Application):
         username.send_keys(user_name)
         password.send_keys(pwd)
         login.click()
+        self.waiter.until(EC.text_to_be_present_in_element((By.TAG_NAME, 'h5'), '講師情報'))
 
     def save_csv(self, dirname, filename):
         keys, values = self.__get_lecturer_info__()
