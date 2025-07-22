@@ -10,7 +10,7 @@ from application import Application
 class TextExtractor(Application):
     def __init__(self):
         super().__init__()
-        self.url    = '{base_url}/{path}'.format(base_url = self.base_url, path = 'login_page')
+        self.url    = f'{self.base_url}/login_page'
         self.waiter = WebDriverWait(self.chrome, 10)
 
     def login(self, user_name, pwd):

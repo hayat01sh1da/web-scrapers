@@ -10,7 +10,7 @@ from application import Application
 class InfoCollector(Application):
     def __init__(self):
         super().__init__()
-        self.url          = '{base_url}/{path}'.format(base_url = self.base_url, path = 'ranking')
+        self.url          = f'{self.base_url}/ranking'
         self.list_handler = ListHandler()
 
     def save_csv(self, dirname, filename):
@@ -45,7 +45,7 @@ class InfoCollector(Application):
         if i == None:
             target_url = self.url
         else:
-            target_url = '{url}?page={i}'.format(url = self.url, i = i)
+            target_url = f'{self.url}?page={i}'
         self.chrome.get(target_url)
 
     def __get_titles__(self, i):

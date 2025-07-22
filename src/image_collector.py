@@ -8,16 +8,19 @@ from application import Application
 class ImageCollector(Application):
     def __init__(self):
         super().__init__()
-        self.url = '{base_url}/{path}'.format(base_url = self.base_url, path = 'image')
+        self.url = f'{self.base_url}/image'
 
     def save_images(self, dirname, filename):
         if not os.path.exists(dirname):
             os.makedirs(dirname)
 
-        filepath = os.path.join(dirname, filename)
-        i        = 1
+        i = 1
         for image in self.__get_images__():
-            image.save(filepath.format(i = i))
+            # Assume filename has an extension, insert number before the extension
+            name_part, ext = os.path.splitext(filename)
+            image_filename = f'{name_part}_{i}{ext}'
+            filepath = os.path.join(dirname, image_filename)
+            image.save(filepath)
             i += 1
 
     # private
