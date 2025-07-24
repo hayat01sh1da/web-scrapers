@@ -14,16 +14,16 @@ class TestPillowSample(TestApplication):
         self.pillow_sample = PillowSample(self.filepath.format(dirname = './imgs', filename = self.filename.format(suffix = '')))
 
     def test_image_size(self):
-        self.assertEqual((1200, 798), self.pillow_sample.image.size)
+        self.assertEqual(self.pillow_sample.image.size, (1200, 798))
 
     def test_resize_image(self):
-        self.assertEqual((1024, 768), self.pillow_sample.resize_image((1024, 768)))
+        self.assertEqual(self.pillow_sample.resize_image((1024, 768)), (1024, 768))
 
     def test_save_image(self):
         self.pillow_sample.resize_image((1024, 768))
         filepath = self.filepath.format(dirname = self.dirname, filename = self.filename.format(suffix = '_resized'))
         self.pillow_sample.save_image(self.dirname, self.filename.format(suffix = '_resized'))
-        self.assertEqual(True, path.exists(filepath))
+        self.assertTrue(path.exists(filepath))
 
 if __name__ == '__main__':
     unittest.main()

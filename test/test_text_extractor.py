@@ -22,14 +22,17 @@ class TestTextExtractor(TestApplication):
             items = csv.DictReader(f)
             for item in items:
                 lecturer_info.append(item)
-        self.assertEqual(True, path.exists(filepath))
-        self.assertEqual([
+        self.assertTrue(path.exists(filepath))
+        self.assertEqual(
+            lecturer_info,
+            [
                 {'': '0', '項目': '講師名', '値': '今西 航平'},
                 {'': '1', '項目': '所属企業', '値': '株式会社キカガク'},
                 {'': '2', '項目': '生年月日', '値': '1994年7月15日'},
                 {'': '3', '項目': '出身', '値': '千葉県'},
                 {'': '4', '項目': '趣味', '値': 'バスケットボール、読書、ガジェット集め'}
-            ], lecturer_info)
+            ]
+        )
 
 if __name__ == '__main__':
     unittest.main()

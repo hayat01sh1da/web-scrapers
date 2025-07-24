@@ -29,11 +29,11 @@ class TestApplication(unittest.TestCase):
 
     def test_webdriver(self):
         if type(self) is TestApplication:
-            self.assertEqual("<class 'selenium.webdriver.chrome.webdriver.WebDriver'>", str(type(self.application.chrome)))
+            self.assertEqual(str(type(self.application.chrome)), "<class 'selenium.webdriver.chrome.webdriver.WebDriver'>")
 
     def test_base_url(self):
         if type(self) is TestApplication:
-            self.assertEqual('https://scraping-for-beginner.herokuapp.com', self.application.base_url)
+            self.assertEqual(self.application.base_url, 'https://scraping-for-beginner.herokuapp.com')
 
 if __name__ == '__main__':
     unittest.main()
