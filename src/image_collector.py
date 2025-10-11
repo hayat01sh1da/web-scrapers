@@ -45,7 +45,9 @@ class ImageCollector(Application):
                 if files:
                     images = []
                     for fn in files:
-                        images.append(Image.open(fn))
+                        # Open and copy to close file handles immediately.
+                        with Image.open(fn) as img:
+                            images.append(img.copy())
                     return images
 
         # Fallback: use selenium to fetch images from the live site
@@ -57,6 +59,6 @@ class ImageCollector(Application):
         images = []
         for img_url in img_urls:
             f     = io.BytesIO(request.urlopen(img_url).read())
-            image = Image.open(f)
-            images.append(image)
+            with Image.open(f) as image:
+                images.append(image.copy())
         return images
