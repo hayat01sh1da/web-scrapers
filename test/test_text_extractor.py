@@ -10,7 +10,9 @@ from test_application import TestApplication
 class TestTextExtractor(TestApplication):
     def setUp(self):
         super().setUp()
-        self.text_extractor = TextExtractor()
+        self.text_extractor = TextExtractor(init_webdriver = False)
+        # login() will be a no-op in tests because webdriver is disabled,
+        # but keep the call to mirror real usage.
         self.text_extractor.login('imanishi', 'kohei')
         self.filename = 'lecturer_info.csv'
 

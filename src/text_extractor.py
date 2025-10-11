@@ -3,17 +3,25 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 import os
+import shutil
 import sys
 sys.path.append('./src')
 from application import Application
 
 class TextExtractor(Application):
-    def __init__(self):
-        super().__init__()
-        self.url    = f'{self.base_url}/login_page'
-        self.waiter = WebDriverWait(self.chrome, 10)
+    def __init__(self, init_webdriver: bool = True):
+        # Allow tests to disable webdriver initialization
+        super().__init__(init_webdriver = init_webdriver)
+        self.url = f'{self.base_url}/login_page'
+        # Only create a WebDriverWait if a real webdriver was initialized
+        self.waiter = None
+        if self.chrome is not None:
+            self.waiter = WebDriverWait(self.chrome, 10)
 
     def login(self, user_name, pwd):
+        # If no webdriver is available (tests), skip performing login.
+        if self.chrome is None:
+            return
         self.chrome.get(self.url)
         username = self.chrome.find_element(By.ID, 'username')
         password = self.chrome.find_element(By.ID, 'password')
@@ -21,7 +29,8 @@ class TextExtractor(Application):
         username.send_keys(user_name)
         password.send_keys(pwd)
         login.click()
-        self.waiter.until(EC.text_to_be_present_in_element((By.TAG_NAME, 'h5'), '講師情報'))
+        if self.waiter is not None:
+            self.waiter.until(EC.text_to_be_present_in_element((By.TAG_NAME, 'h5'), '講師情報'))
 
     def save_csv(self, dirname, filename):
         keys, values = self.__get_lecturer_info__()

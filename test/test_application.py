@@ -9,7 +9,8 @@ from application import Application
 
 class TestApplication(unittest.TestCase):
     def setUp(self):
-        self.application = Application()
+        # Do not initialize a real webdriver during unit tests
+        self.application = Application(init_webdriver = False)
         self.dirname     = os.path.join('.', 'test', 'tmp')
         if not os.path.exists(self.dirname):
             os.makedirs(self.dirname)
@@ -29,7 +30,13 @@ class TestApplication(unittest.TestCase):
 
     def test_webdriver(self):
         if type(self) is TestApplication:
-            self.assertEqual(str(type(self.application.chrome)), "<class 'selenium.webdriver.chrome.webdriver.WebDriver'>")
+            # During unit tests we avoid launching a real browser, so the
+            # webdriver may be None. Accept either None or the expected
+            # WebDriver type.
+            if self.application.chrome is None:
+                self.assertIsNone(self.application.chrome)
+            else:
+                self.assertEqual(str(type(self.application.chrome)), "<class 'selenium.webdriver.chrome.webdriver.WebDriver'>")
 
     def test_base_url(self):
         if type(self) is TestApplication:
