@@ -12,8 +12,7 @@ class TestApplication(unittest.TestCase):
         # Do not initialize a real webdriver during unit tests
         self.application = Application(init_webdriver = False)
         self.dirname     = os.path.join('.', 'test', 'tmp')
-        if not os.path.exists(self.dirname):
-            os.makedirs(self.dirname)
+        os.makedirs(self.dirname, exist_ok = True)
         self.pycaches = glob.glob(os.path.join('.', '**', '__pycache__'), recursive = True)
 
     def tearDown(self):
