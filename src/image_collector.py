@@ -12,8 +12,7 @@ class ImageCollector(Application):
         self.url = f'{self.base_url}/image'
 
     def save_images(self, dirname, filename):
-        if not os.path.exists(dirname):
-            os.makedirs(dirname)
+        os.makedirs(dirname, exist_ok = True)
 
         i = 1
         for image in self.__get_images__():

@@ -19,8 +19,7 @@ class InfoCollector(Application):
         local_paths = ['./csv/tour_reviews.csv', 'csv/tour_reviews.csv']
         for local_path in local_paths:
             if os.path.exists(local_path):
-                if not os.path.exists(dirname):
-                    os.makedirs(dirname)
+                os.makedirs(dirname, exist_ok = True)
                 shutil.copyfile(local_path, os.path.join(dirname, filename))
                 return
 
@@ -44,8 +43,7 @@ class InfoCollector(Application):
         df_rankings.columns = self.__get_categories__()
         df                  = pd.concat([df, df_rankings], axis = 1)
 
-        if not os.path.exists(dirname):
-            os.makedirs(dirname)
+        os.makedirs(dirname, exist_ok = True)
         filepath = os.path.join(dirname, filename)
         df.to_csv(filepath)
 

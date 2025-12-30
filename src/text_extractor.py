@@ -37,8 +37,7 @@ class TextExtractor(Application):
         local_paths = ['./csv/lecturer_info.csv', 'csv/lecturer_info.csv']
         for p in local_paths:
             if os.path.exists(p):
-                if not os.path.exists(dirname):
-                    os.makedirs(dirname)
+                os.makedirs(dirname, exist_ok = True)
                 shutil.copyfile(p, os.path.join(dirname, filename))
                 return
 
@@ -47,8 +46,7 @@ class TextExtractor(Application):
         df['項目']    = keys
         df['値']     = values
 
-        if not os.path.exists(dirname):
-            os.makedirs(dirname)
+        os.makedirs(dirname, exist_ok = True)
         filepath = os.path.join(dirname, filename)
         df.to_csv(filepath)
 
