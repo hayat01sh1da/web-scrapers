@@ -2,10 +2,8 @@
 
 ## Supported Versions
 
-- Security fixes target the latest `master` branch. Please re-run scrapers with
-	the current dependency set before opening reports.
-- Older sample scripts or pinned Chromedriver builds are not updated once
-	superseded.
+- Security fixes target the latest `master` branch. Please re-run scrapers with the current dependency set before opening reports.
+- Older sample scripts or pinned Chromedriver builds are not updated once superseded.
 
 ## Ecosystem & Compatibility
 
@@ -18,11 +16,8 @@
 
 ## Backward Compatibility
 
-- Scrapers are tested with the Chrome/Chromedriver pairing listed above. We aim
-	to stay compatible with newer Chrome patch releases; older major versions are
-	unsupported.
-- Selenium scripts rely on Python 3.14.x semantics. Running them on older
-	Python versions may break and is outside our support window.
+- Scrapers are tested with the Chrome/Chromedriver pairing listed above. We aim to stay compatible with newer Chrome patch releases; older major versions are unsupported.
+- Selenium scripts rely on Python 3.14.x semantics. Running them on older Python versions may break and is outside our support window.
 
 ## Reporting a Vulnerability
 
@@ -33,5 +28,4 @@ vulnerability** workflow or email `security@project.org` with:
 - Dependency versions (`pip freeze`, Chromedriver build)
 - Steps to reproduce and observed impact
 
-We acknowledge within **3 business days** and share updates at least every **7
-business days** while triaging.
+We acknowledge within **3 business days** and share updates at least every **7 business days** while triaging.
