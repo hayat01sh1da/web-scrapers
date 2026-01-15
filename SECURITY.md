@@ -2,20 +2,30 @@
 
 ## Supported Versions
 
-The table below lists the release lines that currently receive security updates.
-At present, only versions 5.1.x and 4.0.x are supported for security fixes.
+- Security fixes target the latest `master` branch. Please re-run scrapers with the current dependency set before opening reports.
+- Older sample scripts or pinned Chromedriver builds are not updated once superseded.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Ecosystem & Compatibility
+
+| Component / Library      | Version(s) / Tooling                     | Notes |
+| ------------------------ | ---------------------------------------- | ----- |
+| OS baseline              | WSL (Ubuntu 24.04.3 LTS)                 | Matches README instructions. |
+| Python runtime           | CPython 3.14.2 (`.python-version`)       | Install dependencies via pip. |
+| Core Python packages     | `pandas`, `Pillow`, `selenium`, `urllib3` | See `requirements.txt`. |
+| Browser automation       | Google Chrome Stable + matching Chromedriver for installed Chrome (e.g., 131.x; keep in sync with Chrome releases) | Follow README steps to install binaries and export `PATH_TO_WEBDRIVER`. |
+
+## Backward Compatibility
+
+- Scrapers are tested with the Chrome/Chromedriver pairing listed above. We aim to stay compatible with newer Chrome patch releases; older major versions are unsupported.
+- Selenium scripts rely on Python 3.14.x semantics. Running them on older Python versions may break and is outside our support window.
 
 ## Reporting a Vulnerability
 
-To report a security vulnerability, please contact our security team at **security@example.com** or via the security contact form at **https://example.com/security**. Do not file public GitHub issues for security problems.
+Disclose vulnerabilities privately via GitHub’s **Security → Report a
+vulnerability** workflow with:
 
-We will acknowledge receipt of your report within **3 business days** and will provide you with a tracking identifier for your report. You can expect progress updates at least every **7 business days** while we investigate and remediate the issue.
+- Target URL(s) and scraper script name
+- Dependency versions (`pip freeze`, Chromedriver build)
+- Steps to reproduce and observed impact
 
-After triage, we will assess the severity and impact, develop and test a fix where appropriate, and coordinate a release. If the vulnerability is accepted, we will work with you on coordinated disclosure and, if you wish, discuss public credit in release notes. If we determine that the report does not represent a security vulnerability or is out of scope, we will explain our reasoning and close the report.
+We acknowledge within **3 business days** and share updates at least every **7 business days** while triaging.
