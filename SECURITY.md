@@ -22,7 +22,7 @@
 ## Reporting a Vulnerability
 
 Disclose vulnerabilities privately via GitHub’s **Security → Report a
-vulnerability** workflow or email `security@project.org` with:
+vulnerability** workflow with:
 
 - Target URL(s) and scraper script name
 - Dependency versions (`pip freeze`, Chromedriver build)
