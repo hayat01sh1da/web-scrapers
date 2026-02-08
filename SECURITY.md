@@ -10,7 +10,7 @@
 | Component / Library      | Version(s) / Tooling                     | Notes |
 | ------------------------ | ---------------------------------------- | ----- |
 | OS baseline              | WSL (Ubuntu 24.04.3 LTS)                 | Matches README instructions. |
-| Python runtime           | CPython 3.14.2 (`.python-version`)       | Install dependencies via pip. |
+| Python runtime           | CPython 3.14.3 (`.python-version`)       | Install dependencies via pip. |
 | Core Python packages     | `pandas`, `Pillow`, `selenium`, `urllib3` | See `requirements.txt`. |
 | Browser automation       | Google Chrome Stable + matching Chromedriver for installed Chrome (e.g., 131.x; keep in sync with Chrome releases) | Follow README steps to install binaries and export `PATH_TO_WEBDRIVER`. |
 
