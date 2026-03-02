@@ -1,5 +1,3 @@
-# Security Policy
-
 ## Supported Versions
 
 - Security fixes target the latest `master` branch. Please re-run scrapers with the current dependency set before opening reports.
@@ -21,11 +19,7 @@
 
 ## Reporting a Vulnerability
 
-Disclose vulnerabilities privately via GitHub’s **Security → Report a
-vulnerability** workflow with:
+Please report issues privately via **GitHub Security Advisory** (preferred) — open through the repository’s **Security → Report a vulnerability** workflow.
 
-- Target URL(s) and scraper script name
-- Dependency versions (`pip freeze`, Chromedriver build)
-- Steps to reproduce and observed impact
-
-We acknowledge within **3 business days** and share updates at least every **7 business days** while triaging.
+Acknowledgement occurs and status updates follow as soon as possible.  
+After remediation we publish guidance alongside required dependency updates.
