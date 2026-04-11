@@ -9,12 +9,12 @@ from info_collector import InfoCollector
 from test_application import TestApplication
 
 class TestInfoCollector(TestApplication):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
-        self.info_collector = InfoCollector()
-        self.filename       = 'tour_reviews.csv'
+        self.info_collector: InfoCollector = InfoCollector()
+        self.filename: str       = 'tour_reviews.csv'
 
-    def test_save_csv(self):
+    def test_save_csv(self) -> None:
         self.info_collector.save_csv(self.dirname, self.filename)
         filepath      = os.path.join(self.dirname, self.filename)
         tour_reviews = []

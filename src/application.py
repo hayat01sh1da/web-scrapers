@@ -1,9 +1,10 @@
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 class Application:
-    def __init__(self, init_webdriver: bool = True):
+    def __init__(self, init_webdriver: bool = True) -> None:
         """Application core.
 
         Args:
@@ -20,7 +21,7 @@ class Application:
 
     # private
 
-    def __options__(self):
+    def __options__(self) -> Options:
         options = webdriver.ChromeOptions()
         options.add_argument('--headless=new')
         return options

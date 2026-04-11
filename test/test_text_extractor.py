@@ -8,15 +8,15 @@ from text_extractor import TextExtractor
 from test_application import TestApplication
 
 class TestTextExtractor(TestApplication):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
-        self.text_extractor = TextExtractor(init_webdriver = False)
+        self.text_extractor: TextExtractor = TextExtractor(init_webdriver = False)
         # login() will be a no-op in tests because webdriver is disabled,
         # but keep the call to mirror real usage.
         self.text_extractor.login('imanishi', 'kohei')
-        self.filename = 'lecturer_info.csv'
+        self.filename: str = 'lecturer_info.csv'
 
-    def test_save_csv(self):
+    def test_save_csv(self) -> None:
         self.text_extractor.save_csv(self.dirname, self.filename)
         filepath      = os.path.join(os.path.join(self.dirname, self.filename))
         lecturer_info = []
