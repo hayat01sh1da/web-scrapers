@@ -1,11 +1,12 @@
 from selenium.webdriver.common.by import By
+from typing import Any
 from decimal_handler import DecimalHandler
 
 class ListHandler:
-    def __init__(self):
-        self.decimal_handler = DecimalHandler()
+    def __init__(self) -> None:
+        self.decimal_handler: DecimalHandler = DecimalHandler()
 
-    def tag_elems_list(self, items, tag):
+    def tag_elems_list(self, items: list[Any], tag: str) -> list[list[str]]:
         elems_list = []
         for item in items:
             _elems_list = []
@@ -14,7 +15,7 @@ class ListHandler:
             elems_list.append(_elems_list)
         return elems_list
 
-    def class_elems_list(self, items, klass):
+    def class_elems_list(self, items: list[Any], klass: str) -> list[list[float | str]]:
         elems_list = []
         for item in items:
             _elems_list = []

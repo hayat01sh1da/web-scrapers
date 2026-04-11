@@ -8,14 +8,14 @@ sys.path.append('./src/lib')
 from application import Application
 
 class TestApplication(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         # Do not initialize a real webdriver during unit tests
-        self.application = Application(init_webdriver = False)
-        self.dirname     = os.path.join('.', 'test', 'tmp')
+        self.application: Application = Application(init_webdriver = False)
+        self.dirname: str     = os.path.join('.', 'test', 'tmp')
         os.makedirs(self.dirname, exist_ok = True)
-        self.pycaches = glob.glob(os.path.join('.', '**', '__pycache__'), recursive = True)
+        self.pycaches: list[str] = glob.glob(os.path.join('.', '**', '__pycache__'), recursive = True)
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         if type(self) is TestApplication:
             for pycache in self.pycaches:
                 if os.path.exists(pycache):
@@ -27,7 +27,7 @@ class TestApplication(unittest.TestCase):
                 if os.path.exists(pycache):
                     shutil.rmtree(pycache)
 
-    def test_webdriver(self):
+    def test_webdriver(self) -> None:
         if type(self) is TestApplication:
             # During unit tests we avoid launching a real browser, so the
             # webdriver may be None. Accept either None or the expected
@@ -37,7 +37,7 @@ class TestApplication(unittest.TestCase):
             else:
                 self.assertEqual(str(type(self.application.chrome)), "<class 'selenium.webdriver.chrome.webdriver.WebDriver'>")
 
-    def test_base_url(self):
+    def test_base_url(self) -> None:
         if type(self) is TestApplication:
             self.assertEqual(self.application.base_url, 'https://scraping-for-beginner.herokuapp.com')
 

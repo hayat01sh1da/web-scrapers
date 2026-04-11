@@ -8,12 +8,12 @@ from image_collector import ImageCollector
 from test_application import TestApplication
 
 class TestImageCollector(TestApplication):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
-        self.image_collector = ImageCollector()
-        self.filename        = 'image_{i:02}.jpg'
+        self.image_collector: ImageCollector = ImageCollector()
+        self.filename: str        = 'image_{i:02}.jpg'
 
-    def test_save_images(self):
+    def test_save_images(self) -> None:
         self.image_collector.save_images(self.dirname, self.filename)
         filepath = os.path.join(self.dirname, self.filename)
         self.assertTrue(path.exists(filepath.format(i = 1)))

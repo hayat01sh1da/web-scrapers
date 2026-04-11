@@ -7,19 +7,19 @@ from pillow_sample import PillowSample
 from test_application import TestApplication
 
 class TestPillowSample(TestApplication):
-    def setUp(self):
+    def setUp(self) -> None:
         super().setUp()
-        self.filename      = 'bird{suffix}.jpg'
-        self.filepath      = '{dirname}/{filename}'
-        self.pillow_sample = PillowSample(self.filepath.format(dirname = './imgs', filename = self.filename.format(suffix = '')))
+        self.filename: str      = 'bird{suffix}.jpg'
+        self.filepath: str      = '{dirname}/{filename}'
+        self.pillow_sample: PillowSample = PillowSample(self.filepath.format(dirname = './imgs', filename = self.filename.format(suffix = '')))
 
-    def test_image_size(self):
+    def test_image_size(self) -> None:
         self.assertEqual(self.pillow_sample.image.size, (1200, 798))
 
-    def test_resize_image(self):
+    def test_resize_image(self) -> None:
         self.assertEqual(self.pillow_sample.resize_image((1024, 768)), (1024, 768))
 
-    def test_save_image(self):
+    def test_save_image(self) -> None:
         self.pillow_sample.resize_image((1024, 768))
         filepath = self.filepath.format(dirname = self.dirname, filename = self.filename.format(suffix = '_resized'))
         self.pillow_sample.save_image(self.dirname, self.filename.format(suffix = '_resized'))
