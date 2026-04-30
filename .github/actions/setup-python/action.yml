@@ -1,5 +1,9 @@
 name: Setup Python Environment
 description: Setup Python with caching and dependency installation
+inputs:
+  job-name:
+    description: The name of the job that will use this action
+    required: true
 
 runs:
   using: composite
@@ -19,10 +23,13 @@ runs:
       # See https://github.com/actions/cache/blob/main/examples.md#pip
         PIP_CACHE_DIR: ${{ runner.temp }}/pip_cache
     - name: Set up Google Chrome
+      if: ${{ inputs.job-name == 'unittest' }}
       uses: browser-actions/setup-chrome@v1
     - name: Set up Chromedriver
+      if: ${{ inputs.job-name == 'unittest' }}
       uses: nanasess/setup-chromedriver@v2
     - name: Start Chromedriver
+      if: ${{ inputs.job-name == 'unittest' }}
       shell: bash
       working-directory: .
       run: export DISPLAY=:99 && chromedriver --url-base=/wd/hub &
