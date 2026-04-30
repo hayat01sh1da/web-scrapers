@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-python
       - name: flake8
-        working-directory: ./python
+        working-directory: .
         run: |
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -69,7 +69,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-python
       - name: UnitTest
-        working-directory: ./python
+        working-directory: .
         run: |
           echo 'export PATH_TO_WEBDRIVER=/usr/local/bin/chromedriver' > ~/.bash_profile
           source ~/.bash_profile
@@ -83,5 +83,5 @@ jobs:
   #     - uses: actions/checkout@v6
   #     - uses: ./.github/actions/setup-python
   #     - name: mypy
-  #       working-directory: ./python
+  #       working-directory: .
   #       run: mypy .
