@@ -1,6 +1,8 @@
 flake8
+mypy
 pandas
 pillow
 pip
+pytest
 selenium
 urllib3
