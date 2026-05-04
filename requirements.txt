@@ -1,8 +1,6 @@
-flake8
-mypy
-pandas
-pillow
-pip
-pytest
-selenium
-urllib3
+flake8==7.3.0
+pandas==3.0.2
+pillow==12.2.0
+pytest==9.0.3
+selenium==4.43.0
+urllib3==2.6.3
