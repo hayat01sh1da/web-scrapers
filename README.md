@@ -67,19 +67,26 @@ Please see https://chromedriver.chromium.org/security-considerations for suggest
 ChromeDriver was started successfully on port 35997.
 ```
 
-## 8. Bulk Execution of Unit Tests
+## 8. Install Libraries via requirements.txt
 
 ```command
-$ python -m unittest discover ./test
-.............../home/hayat01sh1da/.pyenv/versions/3.13.0/lib/python3.13/unittest/suite.py:107: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/c/Users/binlh/Documents/web/web-scrapers/imgs/bird.jpg'>
-  for index, test in enumerate(self):
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-..../home/hayat01sh1da/.pyenv/versions/3.13.0/lib/python3.13/unittest/suite.py:84: ResourceWarning: unclosed file <_io.BufferedReader name='/mnt/c/Users/binlh/Documents/web/web-scrapers/imgs/bird.jpg'>
-  return self.run(*args, **kwds)
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-.....
-----------------------------------------------------------------------
-Ran 24 tests in 74.834s
+$ pip install -r requirements.txt
+```
 
-OK
+## 9. Unit Test
+
+```command
+$ pytest
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0
+rootdir: /mnt/c/Users/binlh/Documents/development/web-scrapers
+collected 24 items
+
+test/test_application.py ..                                              [  8%]
+test/test_image_collector.py .....                                       [ 29%]
+test/test_info_collector.py .....                                        [ 50%]
+test/test_pillow_sample.py .......                                       [ 79%]
+test/test_text_extractor.py .....                                        [100%]
+
+============================== 24 passed in 7.58s ==============================
 ```
