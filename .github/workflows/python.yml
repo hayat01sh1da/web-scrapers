@@ -72,7 +72,7 @@ jobs:
       - uses: ./.github/actions/setup-python
         with:
           job-name: unittest
-      - name: UnitTest
+      - name: pytest
         working-directory: .
         run: |
           echo 'export PATH_TO_WEBDRIVER=/usr/local/bin/chromedriver' > ~/.bash_profile
