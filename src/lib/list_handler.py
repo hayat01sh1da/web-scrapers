@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from decimal_handler import DecimalHandler
 
+
 class ListHandler:
     def __init__(self):
         self.decimal_handler = DecimalHandler()
@@ -18,7 +19,7 @@ class ListHandler:
         elems_list = []
         for item in items:
             _elems_list = []
-            for elem in item.find_elements(By.CLASS_NAME , klass):
+            for elem in item.find_elements(By.CLASS_NAME, klass):
                 if self.decimal_handler.is_float(elem.text):
                     _elems_list.append(float(elem.text))
                 else:

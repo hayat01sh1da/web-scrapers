@@ -6,20 +6,22 @@ import os
 from glob import glob
 from application import Application
 
+
 class ImageCollector(Application):
     def __init__(self):
         super().__init__()
         self.url = f'{self.base_url}/image'
 
     def save_images(self, dirname, filename):
-        os.makedirs(dirname, exist_ok = True)
+        os.makedirs(dirname, exist_ok=True)
 
         i = 1
         for image in self.__get_images__():
             # If filename contains a formatting placeholder (like '{i:02}'), use it.
-            # Otherwise assume a base name and append the index before the extension.
+            # Otherwise assume a base name and append the index before the
+            # extension.
             if '{' in filename and '}' in filename:
-                image_filename = filename.format(i = i)
+                image_filename = filename.format(i=i)
             else:
                 name_part, ext = os.path.splitext(filename)
                 image_filename = f'{name_part}_{i}{ext}'
@@ -51,13 +53,17 @@ class ImageCollector(Application):
 
         # Fallback: use selenium to fetch images from the live site
         self.chrome.get(self.url)
-        img_divs = self.chrome.find_elements(By.CLASS_NAME, 'material-placeholder')
+        img_divs = self.chrome.find_elements(
+            By.CLASS_NAME, 'material-placeholder')
         img_urls = []
         for img_div in img_divs:
-            img_urls.append(img_div.find_element(By.TAG_NAME, 'img').get_attribute('src'))
+            img_urls.append(
+                img_div.find_element(
+                    By.TAG_NAME,
+                    'img').get_attribute('src'))
         images = []
         for img_url in img_urls:
-            f     = io.BytesIO(request.urlopen(img_url).read())
+            f = io.BytesIO(request.urlopen(img_url).read())
             with Image.open(f) as image:
                 images.append(image.copy())
         return images

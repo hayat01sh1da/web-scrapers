@@ -1,3 +1,4 @@
+from application import Application
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -6,12 +7,12 @@ import os
 import shutil
 import sys
 sys.path.append('./src')
-from application import Application
+
 
 class TextExtractor(Application):
     def __init__(self, init_webdriver: bool = True):
         # Allow tests to disable webdriver initialization
-        super().__init__(init_webdriver = init_webdriver)
+        super().__init__(init_webdriver=init_webdriver)
         self.url = f'{self.base_url}/login_page'
         # Only create a WebDriverWait if a real webdriver was initialized
         self.waiter = None
@@ -25,42 +26,44 @@ class TextExtractor(Application):
         self.chrome.get(self.url)
         username = self.chrome.find_element(By.ID, 'username')
         password = self.chrome.find_element(By.ID, 'password')
-        login    = self.chrome.find_element(By.ID, 'login-btn')
+        login = self.chrome.find_element(By.ID, 'login-btn')
         username.send_keys(user_name)
         password.send_keys(pwd)
         login.click()
         if self.waiter is not None:
-            self.waiter.until(EC.text_to_be_present_in_element((By.TAG_NAME, 'h5'), '講師情報'))
+            self.waiter.until(
+                EC.text_to_be_present_in_element(
+                    (By.TAG_NAME, 'h5'), '講師情報'))
 
     def save_csv(self, dirname, filename):
         # If a local CSV exists (used by tests), copy it directly.
         local_paths = ['./csv/lecturer_info.csv', 'csv/lecturer_info.csv']
         for p in local_paths:
             if os.path.exists(p):
-                os.makedirs(dirname, exist_ok = True)
+                os.makedirs(dirname, exist_ok=True)
                 shutil.copyfile(p, os.path.join(dirname, filename))
                 return
 
         keys, values = self.__get_lecturer_info__()
-        df           = pd.DataFrame()
-        df['項目']    = keys
-        df['値']     = values
+        df = pd.DataFrame()
+        df['項目'] = keys
+        df['値'] = values
 
-        os.makedirs(dirname, exist_ok = True)
+        os.makedirs(dirname, exist_ok=True)
         filepath = os.path.join(dirname, filename)
         df.to_csv(filepath)
 
     # private
 
     def __get_lecturer_info__(self):
-        keys   = []
+        keys = []
         values = []
 
-        ths  = self.chrome.find_elements(By.TAG_NAME, 'th')
+        ths = self.chrome.find_elements(By.TAG_NAME, 'th')
         for th in ths:
             keys.append(th.text)
 
-        tds    = self.chrome.find_elements(By.TAG_NAME, 'td')
+        tds = self.chrome.find_elements(By.TAG_NAME, 'td')
         for td in tds:
             if '\n' in td.text:
                 values.append(td.text.replace('\n', '、'))

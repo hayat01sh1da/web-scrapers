@@ -1,16 +1,17 @@
+from test_application import TestApplication
+from text_extractor import TextExtractor
+from os import path
 import unittest
 import os
 import csv
 import sys
 sys.path.append('./src')
-from os import path
-from text_extractor import TextExtractor
-from test_application import TestApplication
+
 
 class TestTextExtractor(TestApplication):
     def setUp(self):
         super().setUp()
-        self.text_extractor = TextExtractor(init_webdriver = False)
+        self.text_extractor = TextExtractor(init_webdriver=False)
         # login() will be a no-op in tests because webdriver is disabled,
         # but keep the call to mirror real usage.
         self.text_extractor.login('imanishi', 'kohei')
@@ -18,7 +19,7 @@ class TestTextExtractor(TestApplication):
 
     def test_save_csv(self):
         self.text_extractor.save_csv(self.dirname, self.filename)
-        filepath      = os.path.join(os.path.join(self.dirname, self.filename))
+        filepath = os.path.join(os.path.join(self.dirname, self.filename))
         lecturer_info = []
         with open(filepath) as f:
             items = csv.DictReader(f)
@@ -35,6 +36,7 @@ class TestTextExtractor(TestApplication):
                 {'': '4', '項目': '趣味', '値': 'バスケットボール、読書、ガジェット集め'}
             ]
         )
+
 
 if __name__ == '__main__':
     unittest.main()
