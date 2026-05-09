@@ -1,22 +1,23 @@
+from os import path
 import unittest
 import os
 import csv
 import sys
 sys.path.append('./src')
 sys.path.append('./src/lib')
-from os import path
 from info_collector import InfoCollector
 from test_application import TestApplication
+
 
 class TestInfoCollector(TestApplication):
     def setUp(self):
         super().setUp()
         self.info_collector = InfoCollector()
-        self.filename       = 'tour_reviews.csv'
+        self.filename = 'tour_reviews.csv'
 
     def test_save_csv(self):
         self.info_collector.save_csv(self.dirname, self.filename)
-        filepath      = os.path.join(self.dirname, self.filename)
+        filepath = os.path.join(self.dirname, self.filename)
         tour_reviews = []
         with open(filepath) as f:
             _tour_reviews = csv.DictReader(f)
@@ -58,6 +59,7 @@ class TestInfoCollector(TestApplication):
                 {'': '29', '観光地': '観光地 30', '総合評価': '2.8', '楽しさ': '2.7', '人混みの多さ': '3.1', '景色': '3.3', 'アクセス': '2.3'}
             ],
         )
+
 
 if __name__ == '__main__':
     unittest.main()
