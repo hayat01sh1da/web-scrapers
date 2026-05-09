@@ -1,3 +1,5 @@
+from application import Application
+from list_handler import ListHandler
 from selenium.webdriver.common.by import By
 import pandas as pd
 import os
@@ -5,13 +7,12 @@ import sys
 import shutil
 sys.path.append('./src')
 sys.path.append('./src/lib')
-from list_handler import ListHandler
-from application import Application
+
 
 class InfoCollector(Application):
     def __init__(self):
         super().__init__()
-        self.url          = f'{self.base_url}/ranking'
+        self.url = f'{self.base_url}/ranking'
         self.list_handler = ListHandler()
 
     def save_csv(self, dirname, filename):
@@ -19,38 +20,38 @@ class InfoCollector(Application):
         local_paths = ['./csv/tour_reviews.csv', 'csv/tour_reviews.csv']
         for local_path in local_paths:
             if os.path.exists(local_path):
-                os.makedirs(dirname, exist_ok = True)
+                os.makedirs(dirname, exist_ok=True)
                 shutil.copyfile(local_path, os.path.join(dirname, filename))
                 return
 
-        _titles      = []
+        _titles = []
         _evaluations = []
-        _rankings    = []
+        _rankings = []
 
         for i in range(1, 4):
             _titles.append(self.__get_titles__(i))
             _evaluations.append(self.__get_evaluations__(i))
             _rankings.append(self.__get_rankings__(i))
 
-        titles      = sum(_titles, [])
+        titles = sum(_titles, [])
         evaluations = sum(_evaluations, [])
-        rankings    = sum(_rankings, [])
+        rankings = sum(_rankings, [])
 
-        df                  = pd.DataFrame()
-        df['観光地']         = titles
-        df['総合評価']       = evaluations
-        df_rankings         = pd.DataFrame(rankings)
+        df = pd.DataFrame()
+        df['観光地'] = titles
+        df['総合評価'] = evaluations
+        df_rankings = pd.DataFrame(rankings)
         df_rankings.columns = self.__get_categories__()
-        df                  = pd.concat([df, df_rankings], axis = 1)
+        df = pd.concat([df, df_rankings], axis=1)
 
-        os.makedirs(dirname, exist_ok = True)
+        os.makedirs(dirname, exist_ok=True)
         filepath = os.path.join(dirname, filename)
         df.to_csv(filepath)
 
     # private
 
-    def __get_url__(self, i = None):
-        if i == None:
+    def __get_url__(self, i=None):
+        if i is None:
             target_url = self.url
         else:
             target_url = f'{self.url}?page={i}'
@@ -59,7 +60,7 @@ class InfoCollector(Application):
     def __get_titles__(self, i):
         self.__get_url__(i)
         elem_titles = self.chrome.find_elements(By.CLASS_NAME, 'u_title')
-        titles      = []
+        titles = []
         for elem_title in elem_titles:
             titles.append(elem_title.text.split('\n')[-1])
         return titles
@@ -67,29 +68,36 @@ class InfoCollector(Application):
     def __get_evaluations__(self, i):
         self.__get_url__(i)
         elem_rank_boxes = self.chrome.find_elements(By.CLASS_NAME, 'u_rankBox')
-        evaluations     = []
+        evaluations = []
         for elem_rank_box in elem_rank_boxes:
-            evaluations.append(float(elem_rank_box.find_element(By.CLASS_NAME, 'evaluateNumber').text))
+            evaluations.append(
+                float(
+                    elem_rank_box.find_element(
+                        By.CLASS_NAME,
+                        'evaluateNumber').text))
         return evaluations
 
     def __get_ranking_items__(self):
-        elem_ranking_items = self.chrome.find_elements(By.CLASS_NAME, 'u_categoryTipsItem')
+        elem_ranking_items = self.chrome.find_elements(
+            By.CLASS_NAME, 'u_categoryTipsItem')
         return elem_ranking_items
 
     def __get_rankings__(self, i):
         self.__get_url__(i)
         elem_ranking_items = self.__get_ranking_items__()
-        rankings           = self.list_handler.class_elems_list(elem_ranking_items, 'is_rank')
+        rankings = self.list_handler.class_elems_list(
+            elem_ranking_items, 'is_rank')
         return rankings
 
     def __get_categories__(self):
         self.__get_url__()
         elem_ranking_items = self.__get_ranking_items__()
-        categories         = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
+        categories = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
         return categories[0]
 
     def __get_comments__(self, query_string):
         self.__get_url__(query_string)
         elem_ranking_items = self.__get_ranking_items__()
-        comments           = self.list_handler.class_elems_list(elem_ranking_items, 'comment')
+        comments = self.list_handler.class_elems_list(
+            elem_ranking_items, 'comment')
         return comments
