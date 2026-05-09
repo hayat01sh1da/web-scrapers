@@ -1,5 +1,3 @@
-from test_application import TestApplication
-from info_collector import InfoCollector
 from os import path
 import unittest
 import os
@@ -7,6 +5,8 @@ import csv
 import sys
 sys.path.append('./src')
 sys.path.append('./src/lib')
+from info_collector import InfoCollector
+from test_application import TestApplication
 
 
 class TestInfoCollector(TestApplication):

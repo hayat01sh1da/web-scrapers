@@ -1,10 +1,10 @@
-from test_application import TestApplication
-from pillow_sample import PillowSample
 from os import path
 import unittest
 import sys
 sys.path.append('./src')
 sys.path.append('./test')
+from pillow_sample import PillowSample
+from test_application import TestApplication
 
 
 class TestPillowSample(TestApplication):

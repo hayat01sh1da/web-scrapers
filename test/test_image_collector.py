@@ -1,11 +1,11 @@
-from test_application import TestApplication
-from image_collector import ImageCollector
 from os import path
 import unittest
 import os
 import sys
 sys.path.append('./src')
 sys.path.append('./test')
+from image_collector import ImageCollector
+from test_application import TestApplication
 
 
 class TestImageCollector(TestApplication):

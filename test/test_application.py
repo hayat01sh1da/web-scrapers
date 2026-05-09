@@ -1,4 +1,3 @@
-from application import Application
 import unittest
 import os
 import shutil
@@ -6,6 +5,7 @@ import glob
 import sys
 sys.path.append('./src')
 sys.path.append('./src/lib')
+from application import Application
 
 
 class TestApplication(unittest.TestCase):

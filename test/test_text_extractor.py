@@ -1,11 +1,11 @@
-from test_application import TestApplication
-from text_extractor import TextExtractor
 from os import path
 import unittest
 import os
 import csv
 import sys
 sys.path.append('./src')
+from text_extractor import TextExtractor
+from test_application import TestApplication
 
 
 class TestTextExtractor(TestApplication):
