@@ -1,42 +1,25 @@
-from os import path
-import unittest
-import sys
-sys.path.append('./src')
-sys.path.append('./test')
+import os
+
+import pytest
+
 from pillow_sample import PillowSample
-from test_application import TestApplication
 
 
-class TestPillowSample(TestApplication):
-    def setUp(self):
-        super().setUp()
-        self.filename = 'bird{suffix}.jpg'
-        self.filepath = '{dirname}/{filename}'
-        self.pillow_sample = PillowSample(
-            self.filepath.format(
-                dirname='./imgs',
-                filename=self.filename.format(
-                    suffix='')))
-
-    def test_image_size(self):
-        self.assertEqual(self.pillow_sample.image.size, (1200, 798))
-
-    def test_resize_image(self):
-        self.assertEqual(
-            self.pillow_sample.resize_image(
-                (1024, 768)), (1024, 768))
-
-    def test_save_image(self):
-        self.pillow_sample.resize_image((1024, 768))
-        filepath = self.filepath.format(
-            dirname=self.dirname,
-            filename=self.filename.format(
-                suffix='_resized'))
-        self.pillow_sample.save_image(
-            self.dirname, self.filename.format(
-                suffix='_resized'))
-        self.assertTrue(path.exists(filepath))
+@pytest.fixture
+def pillow_sample():
+    return PillowSample('./imgs/bird.jpg')
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_image_size(pillow_sample):
+    assert pillow_sample.image.size == (1200, 798)
+
+
+def test_resize_image(pillow_sample):
+    assert pillow_sample.resize_image((1024, 768)) == (1024, 768)
+
+
+def test_save_image(pillow_sample, tmp_dir):
+    pillow_sample.resize_image((1024, 768))
+    filename = 'bird_resized.jpg'
+    pillow_sample.save_image(tmp_dir, filename)
+    assert os.path.exists(os.path.join(tmp_dir, filename))
