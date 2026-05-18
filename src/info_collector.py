@@ -1,6 +1,7 @@
 from application import Application
 from list_handler import ListHandler
 from selenium.webdriver.common.by import By
+from typing import Any
 import pandas as pd
 import os
 import sys
@@ -10,12 +11,12 @@ sys.path.append('./src/lib')
 
 
 class InfoCollector(Application):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.url = f'{self.base_url}/ranking'
-        self.list_handler = ListHandler()
+        self.url: str = f'{self.base_url}/ranking'
+        self.list_handler: ListHandler = ListHandler()
 
-    def save_csv(self, dirname, filename):
+    def save_csv(self, dirname: str, filename: str) -> None:
         # If a local CSV exists (used for tests / offline), copy it directly
         local_paths = ['./csv/tour_reviews.csv', 'csv/tour_reviews.csv']
         for local_path in local_paths:
@@ -50,14 +51,14 @@ class InfoCollector(Application):
 
     # private
 
-    def __get_url__(self, i=None):
+    def __get_url__(self, i: Any = None) -> None:
         if i is None:
             target_url = self.url
         else:
             target_url = f'{self.url}?page={i}'
         self.chrome.get(target_url)
 
-    def __get_titles__(self, i):
+    def __get_titles__(self, i: int) -> list[str]:
         self.__get_url__(i)
         elem_titles = self.chrome.find_elements(By.CLASS_NAME, 'u_title')
         titles = []
@@ -65,7 +66,7 @@ class InfoCollector(Application):
             titles.append(elem_title.text.split('\n')[-1])
         return titles
 
-    def __get_evaluations__(self, i):
+    def __get_evaluations__(self, i: int) -> list[float]:
         self.__get_url__(i)
         elem_rank_boxes = self.chrome.find_elements(By.CLASS_NAME, 'u_rankBox')
         evaluations = []
@@ -77,25 +78,25 @@ class InfoCollector(Application):
                         'evaluateNumber').text))
         return evaluations
 
-    def __get_ranking_items__(self):
+    def __get_ranking_items__(self) -> Any:
         elem_ranking_items = self.chrome.find_elements(
             By.CLASS_NAME, 'u_categoryTipsItem')
         return elem_ranking_items
 
-    def __get_rankings__(self, i):
+    def __get_rankings__(self, i: int) -> list[list[Any]]:
         self.__get_url__(i)
         elem_ranking_items = self.__get_ranking_items__()
         rankings = self.list_handler.class_elems_list(
             elem_ranking_items, 'is_rank')
         return rankings
 
-    def __get_categories__(self):
+    def __get_categories__(self) -> list[str]:
         self.__get_url__()
         elem_ranking_items = self.__get_ranking_items__()
         categories = self.list_handler.tag_elems_list(elem_ranking_items, 'dt')
         return categories[0]
 
-    def __get_comments__(self, query_string):
+    def __get_comments__(self, query_string: Any) -> list[list[Any]]:
         self.__get_url__(query_string)
         elem_ranking_items = self.__get_ranking_items__()
         comments = self.list_handler.class_elems_list(

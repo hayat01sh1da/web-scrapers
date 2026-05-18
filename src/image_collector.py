@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 import io
+from typing import Any
 from urllib import request
 from PIL import Image
 import os
@@ -8,11 +9,11 @@ from application import Application
 
 
 class ImageCollector(Application):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.url = f'{self.base_url}/image'
+        self.url: str = f'{self.base_url}/image'
 
-    def save_images(self, dirname, filename):
+    def save_images(self, dirname: str, filename: str) -> None:
         os.makedirs(dirname, exist_ok=True)
 
         i = 1
@@ -31,7 +32,7 @@ class ImageCollector(Application):
 
     # private
 
-    def __get_images__(self):
+    def __get_images__(self) -> list[Any]:
         # If a local `imgs/` directory exists with image files, prefer loading
         # from there. This makes unit tests deterministic and avoids hitting
         # the network or driving a real browser during tests.

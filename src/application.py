@@ -1,10 +1,11 @@
 import os
+from typing import Any
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
 
 class Application:
-    def __init__(self, init_webdriver: bool = True):
+    def __init__(self, init_webdriver: bool = True) -> None:
         """Application core.
 
         Args:
@@ -12,8 +13,8 @@ class Application:
                             Tests may pass False to avoid launching a real
                             browser.
         """
-        self.base_url = 'https://scraping-for-beginner.herokuapp.com'
-        self.chrome = None
+        self.base_url: str = 'https://scraping-for-beginner.herokuapp.com'
+        self.chrome: Any = None
         if init_webdriver:
             # Initialize webdriver only when requested.
             # Use PATH_TO_WEBDRIVER environment variable to locate the driver
@@ -25,7 +26,7 @@ class Application:
 
     # private
 
-    def __options__(self):
+    def __options__(self) -> Any:
         options = webdriver.ChromeOptions()
         options.add_argument('--headless=new')
         return options
