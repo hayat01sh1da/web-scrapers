@@ -2,6 +2,7 @@ from application import Application
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from typing import Any
 import pandas as pd
 import os
 import shutil
@@ -10,16 +11,16 @@ sys.path.append('./src')
 
 
 class TextExtractor(Application):
-    def __init__(self, init_webdriver: bool = True):
+    def __init__(self, init_webdriver: bool = True) -> None:
         # Allow tests to disable webdriver initialization
         super().__init__(init_webdriver=init_webdriver)
-        self.url = f'{self.base_url}/login_page'
+        self.url: str = f'{self.base_url}/login_page'
         # Only create a WebDriverWait if a real webdriver was initialized
-        self.waiter = None
+        self.waiter: Any = None
         if self.chrome is not None:
             self.waiter = WebDriverWait(self.chrome, 10)
 
-    def login(self, user_name, pwd):
+    def login(self, user_name: str, pwd: str) -> None:
         # If no webdriver is available (tests), skip performing login.
         if self.chrome is None:
             return
@@ -35,7 +36,7 @@ class TextExtractor(Application):
                 EC.text_to_be_present_in_element(
                     (By.TAG_NAME, 'h5'), '講師情報'))
 
-    def save_csv(self, dirname, filename):
+    def save_csv(self, dirname: str, filename: str) -> None:
         # If a local CSV exists (used by tests), copy it directly.
         local_paths = ['./csv/lecturer_info.csv', 'csv/lecturer_info.csv']
         for p in local_paths:
@@ -55,7 +56,7 @@ class TextExtractor(Application):
 
     # private
 
-    def __get_lecturer_info__(self):
+    def __get_lecturer_info__(self) -> tuple[list[str], list[str]]:
         keys = []
         values = []
 

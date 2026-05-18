@@ -38,7 +38,7 @@ _EXPECTED_TOUR_REVIEWS = [
 ]
 
 
-def test_save_csv(tmp_dir):
+def test_save_csv(tmp_dir: str) -> None:
     filename = 'tour_reviews.csv'
     InfoCollector().save_csv(tmp_dir, filename)
     filepath = os.path.join(tmp_dir, filename)

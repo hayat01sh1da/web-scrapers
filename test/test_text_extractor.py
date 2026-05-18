@@ -13,7 +13,7 @@ _EXPECTED_LECTURER_INFO = [
 ]
 
 
-def test_save_csv(tmp_dir):
+def test_save_csv(tmp_dir: str) -> None:
     text_extractor = TextExtractor(init_webdriver=False)
     text_extractor.login('imanishi', 'kohei')
     filename = 'lecturer_info.csv'
