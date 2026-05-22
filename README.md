@@ -76,17 +76,65 @@ $ pip install -r requirements.txt
 ## 9. Unit Test
 
 ```command
-$ pytest
+$ pytest .
 ============================= test session starts ==============================
 platform linux -- Python 3.14.5, pytest-9.0.3, pluggy-1.6.0
-rootdir: /mnt/c/Users/binlh/Documents/development/web-scrapers
-collected 24 items
+rootdir: web-scrapers
+configfile: pyproject.toml
+collected 8 items
 
-test/test_application.py ..                                              [  8%]
-test/test_image_collector.py .....                                       [ 29%]
-test/test_info_collector.py .....                                        [ 50%]
-test/test_pillow_sample.py .......                                       [ 79%]
-test/test_text_extractor.py .....                                        [100%]
+test/test_application.py ..                                              [ 25%]
+test/test_image_collector.py .                                           [ 37%]
+test/test_info_collector.py .                                            [ 50%]
+test/test_pillow_sample.py ...                                           [ 87%]
+test/test_text_extractor.py .                                            [100%]
 
-============================== 24 passed in 7.58s ==============================
+============================== 8 passed in 6.79s ===============================
+```
+
+## 10. Static Code Analysis
+
+```command
+$ flake8 .
+./src/image_collector.py:21:80: E501 line too long (84 > 79 characters)
+./test/test_application.py:15:80: E501 line too long (87 > 79 characters)
+./test/test_info_collector.py:8:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:9:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:10:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:11:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:12:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:13:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:14:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:15:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:16:80: E501 line too long (104 > 79 characters)
+./test/test_info_collector.py:17:80: E501 line too long (105 > 79 characters)
+./test/test_info_collector.py:18:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:19:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:20:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:21:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:22:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:23:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:24:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:25:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:26:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:27:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:28:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:29:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:30:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:31:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:32:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:33:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:34:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:35:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:36:80: E501 line too long (106 > 79 characters)
+./test/test_info_collector.py:37:80: E501 line too long (106 > 79 characters)
+$ autoflake8 --in-place --remove-duplicate-keys --remove-unused-variables --recursive .
+$ autopep8 --in-place --aggressive --aggressive --recursive .
+```
+
+## 11. Type Checks
+
+```command
+$ mypy .
+Success: no issues found in 17 source files
 ```
