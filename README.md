@@ -76,7 +76,7 @@ $ pip install -r requirements.txt
 ## 9. Unit Test
 
 ```command
-$ pytest .
+$ invoke
 ============================= test session starts ==============================
 platform linux -- Python 3.14.5, pytest-9.0.3, pluggy-1.6.0
 rootdir: web-scrapers
