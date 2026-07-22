@@ -2,7 +2,7 @@ ast_serialize==0.6.0
 attrs==26.1.0
 autoflake8==0.4.1
 autopep8==2.3.2
-certifi==2026.6.17
+certifi==2026.7.22
 flake8==7.3.0
 h11==0.16.0
 idna==3.18
