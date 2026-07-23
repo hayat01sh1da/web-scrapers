@@ -3,7 +3,7 @@ autopep8==2.3.2
 flake8==7.3.0
 invoke==3.0.3
 mypy==2.3.0
-pandas==3.0.3
+pandas==3.0.5
 pillow==12.3.0
 pytest==9.1.1
 selenium==4.46.0
