@@ -7,4 +7,4 @@ pandas==3.0.5
 pillow==12.3.0
 pytest==9.1.1
 selenium==4.49.0
-urllib3==2.7.0
+urllib3==2.8.0
