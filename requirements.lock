@@ -3,7 +3,7 @@ attrs==26.1.0
 autoflake8==0.4.1
 autopep8==2.3.2
 certifi==2026.7.22
-flake8==7.3.0
+flake8==7.4.1
 h11==0.16.0
 idna==3.20
 iniconfig==2.3.0
@@ -19,8 +19,8 @@ pandas==3.0.6
 pathspec==1.1.1
 pillow==12.3.0
 pluggy==1.6.0
-pycodestyle==2.14.0
-pyflakes==3.4.0
+pycodestyle==2.15.0
+pyflakes==4.0.0
 Pygments==2.21.0
 PySocks==1.7.1
 pytest==9.1.1
