@@ -1,5 +1,6 @@
 [![Actions Status: Python - CI](https://github.com/hayat01sh1da/web-scrapers/workflows/Python%20-%20CI/badge.svg)](https://github.com/hayat01sh1da/web-scrapers/actions?query=workflow%3A%22Python%20-%20CI%22)
 [![Actions Status: Python - Daily Dependencies Update](https://github.com/hayat01sh1da/web-scrapers/workflows/Python%20-%20Daily%20Dependencies%20Update/badge.svg)](https://github.com/hayat01sh1da/web-scrapers/actions?query=workflow%3A%22Python%20-%20Daily%20Dependencies%20Update%22)
+[![Actions Status: Python - Daily Runtime Update](https://github.com/hayat01sh1da/web-scrapers/workflows/Python%20-%20Daily%20Runtime%20Update/badge.svg)](https://github.com/hayat01sh1da/web-scrapers/actions?query=workflow%3A%22Python%20-%20Daily%20Runtime%20Update%22)
 [![Actions Status: CodeQL](https://github.com/hayat01sh1da/web-scrapers/workflows/CodeQL/badge.svg)](https://github.com/hayat01sh1da/web-scrapers/actions?query=workflow%3A%22CodeQL%22)
 
 ## 1. Environment
