@@ -6,7 +6,7 @@
 ## 1. Environment
 
 - WSL (Ubuntu 25.10)
-- Python 3.14.9
+- Python 3.14.10
 - pip 26.2.2
 
 ## 2. Reference
@@ -81,7 +81,7 @@ $ pip install -r requirements.txt
 ```command
 $ invoke
 ============================= test session starts ==============================
-platform linux -- Python 3.14.9, pytest-9.0.3, pluggy-1.6.0
+platform linux -- Python 3.14.10, pytest-9.0.3, pluggy-1.6.0
 rootdir: web-scrapers
 configfile: pyproject.toml
 collected 8 items
